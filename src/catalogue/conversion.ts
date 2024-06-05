@@ -6,6 +6,7 @@ export function createSimpleEverything(everything: Everything): SimpleEverything
     timestamp: everything.timestamp,
     authors: everything.authors,
     plugin_list: {},
+    last_update_time: everything.last_update_time,
   }
   Object.entries(everything.plugin_list).forEach(([pluginId, plugin], _) => {
     simpleEverything.plugin_list[pluginId] = createSimplePlugin(plugin, everything.authors)

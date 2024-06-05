@@ -6,6 +6,7 @@ export interface SimpleEverything {
   plugin_list: {
     [key: string]: SimplePlugin
   }
+  last_update_time: string
 }
 
 export interface SimplePlugin {

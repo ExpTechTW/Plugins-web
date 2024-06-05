@@ -5,6 +5,7 @@ export interface LangDict {
 }
 
 export interface Everything {
+  last_update_time: string
   github(github: any): unknown
   timestamp: number
   authors: AuthorSummary

@@ -22,7 +22,7 @@ export async function StatsCard({everything}: { everything: SimpleEverything }) 
       <CardSection title={t('stats')} className="gap-1.5">
         <div className="grid grid-cols-2 gap-3">
           <AttributeEntry Icon={IconRefresh} label={t('sync_at')}>
-            <TimeAgoDynamic date={new Date(everything.timestamp * 1000)}/>
+            <TimeAgoDynamic date={new Date(everything.last_update_time)}/>
           </AttributeEntry>
           <AttributeEntry Icon={IconUsers} label={t('author_amount')}>
             {authorAmount}
