@@ -55,43 +55,21 @@ async function fetchEverything(): Promise<Everything> {
   // }
 }
 
-let dataArr: Everything[] = [];
-
-export async function getInfo(repo: (github: any) => unknown) {
-  const url = `https://api.github.com/repos/${repo}/releases`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+export async function getInfo() {
+  const github = await fetchEverything()
+  const url = `https://api.github.com/repos/${github.plugin_list.github}/releases`
+  const rsp = await fetch(url)
+  const data = await rsp.json()
+  console.log(data)
 }
+getInfo()
 
 export async function getEverything(): Promise<Everything> {
-  const e = await devReadLocalEverything();
+  const e = await devReadLocalEverything()
   if (e !== null) {
-    return e;
+    return e
   } else {
-    const data = await fetchEverything();
-    
-    const exists = dataArr.some(existingData => existingData === data);
-    
-    if (!exists) {
-      dataArr.push(data);
-    }
-
-    const plugin_list = data.plugin_list;
-    for (const key in plugin_list) {
-      if (plugin_list.hasOwnProperty(key)) {
-        const plugin = plugin_list[key];
-        const pluginData = await getInfo(plugin.github);
-        
-        const pluginDataExists = dataArr.some(existingData => existingData === pluginData);
-        
-        if (!pluginDataExists) {
-          dataArr.push(pluginData);
-        }
-      }
-    }
-    console.log(dataArr);
-    return data;
+    return await fetchEverything()
   }
 }
 
