@@ -54,7 +54,10 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
   const lastUpdateText = simplePlugin.last_update_time !== undefined
     ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
     : <p className="text-mantine-gray-text">N/A</p>
-  const syncTimeText = <TimeAgoDynamic date={new Date(simplePlugin.last_plugins_update_time)} />
+  // const syncTimeText = <TimeAgoDynamic date={new Date(simplePlugin.last_update_time)} />
+  const syncTimeText = simplePlugin.last_update_time !== undefined
+  ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
+  : <p className="text-mantine-gray-text">N/A</p>
 
   return (
     <div className="mx-[8px] flex flex-col gap-5">

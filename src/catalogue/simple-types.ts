@@ -16,7 +16,6 @@ export interface SimplePlugin {
   labels: string[]
   authors: AuthorInfo[]
   downloads: number
-  
   latestRelease: SimpleRelease | undefined
   name: string
   description: string
@@ -24,7 +23,6 @@ export interface SimplePlugin {
   github: string
   package_name: string
   last_update_time: Date | undefined
-  last_plugins_update_time: string
 }
 
 export interface SimpleRelease {

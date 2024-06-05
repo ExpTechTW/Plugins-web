@@ -9,12 +9,12 @@ export function createSimpleEverything(everything: Everything): SimpleEverything
     last_update_time: everything.last_update_time,
   }
   Object.entries(everything.plugin_list).forEach(([pluginId, plugin], _) => {
-    simpleEverything.plugin_list[pluginId] = createSimplePlugin(plugin, everything.authors, everything.last_update_time)
+    simpleEverything.plugin_list[pluginId] = createSimplePlugin(plugin, everything.authors)
   })
   return simpleEverything
 }
 
-export function createSimplePlugin(plugin: AllOfAPlugin, authorData: AuthorSummary, last_plugins_update_time: string): SimplePlugin {
+export function createSimplePlugin(plugin: AllOfAPlugin, authorData: AuthorSummary): SimplePlugin {
   let downloads = 0
   let latestDate: Date | undefined = undefined
   const releases = plugin.release?.releases || []
@@ -51,7 +51,6 @@ export function createSimplePlugin(plugin: AllOfAPlugin, authorData: AuthorSumma
     github: `https://github.com/${github}`,
     package_name: latestMeta?.name ?? authors,
     last_update_time: latestDate,
-    last_plugins_update_time,
   }
 }
 
