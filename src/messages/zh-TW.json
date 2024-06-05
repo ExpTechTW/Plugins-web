@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "title": {
+      "catalogue": "擴充列表",
+      "plugin": "{name} - 擴充列表",
+      "plugin_release": "{name} v{version} - 擴充列表"
+    }
+  },
+  "layout": {
+    "nav_bar": {
+      "navigation": {
+        "home": "主頁",
+        "plugins": "擴充列表",
+        "docs": "技術文件"
+      },
+      "locale_switch": {
+        "en": "English",
+        "zh-TW": "繁體中文"
+      }
+    }
+  },
+  "component": {
+    "pip_install_code_highlight": {
+      "copy": "複製原始碼",
+      "copied": "已複製"
+    },
+    "plugin_label": {
+      "info": "資訊",
+      "tool": "工具",
+      "management": "管理",
+      "api": "API",
+      "__unknown": "未知"
+    },
+    "plugin_dependencies": {
+      "title_plugin": "MCDR 擴充依賴",
+      "title_package": "Python 包依賴",
+      "plugin_id": "擴充 ID",
+      "py_package": "Python 包",
+      "requirement": "依賴版本",
+      "none": "無",
+      "py_package_command": "Python 包安裝指令"
+    },
+    "github_proxy_switch": {
+      "label": "使用 GitHub Proxy 加速",
+      "tooltip": "使用 https://mirror.ghproxy.com/ 來優化中國大陸地區的下載速度"
+    }
+  },
+  "page": {
+    "home": {
+      "description": "複合式防災伺服器",
+      "catalogue": "探索擴充",
+      "docs": "閱讀技術文件",
+      "github": "GitHub",
+      "feature": {
+        "vanilla_t": "忠於原版",
+        "vanilla": "運行於伺服端之上，僅接管伺服端輸入輸出，無需修改伺服端即可實現各種擴充功能。保留原汁原味的 Minecraft 原版特性",
+        "plugins_t": "功能豐富",
+        "plugins": "小至計算器、高亮玩家、b 站彈幕姬，大至操控計分板、管理結構文件、自助備份回檔，都可以通過編寫 MCDReforged 的擴充實現",
+        "compatibility_t": "兼容性廣",
+        "compatibility": "支持在 Linux / Windows 等平台上運行任意種類的伺服端，包括但不限於 vanilla、fabric、paper 以及 bungeecord 等"
+      }
+    },
+    "plugin_list": {
+      "sidebar": {
+        "plugin_filter": "擴充篩選",
+        "plugin_filter_name": "擴充 ID / 擴充名稱",
+        "plugin_filter_author": "擴充作者",
+        "label_filter": "標籤篩選",
+        "sort_order": "排序方式",
+        "sort_order_type": {
+          "name": "擴充名稱",
+          "downloads": "下載次數",
+          "recentUpdate": "最近更新"
+        },
+        "sort_order_desc": {
+          "name": "擴充名稱",
+          "downloads": "下載次數",
+          "recentUpdate": "最近更新"
+        },
+        "sort_reversed": "逆序",
+        "stats": "統計資訊",
+        "sync_at": "資料同步於",
+        "author_amount": "作者總數",
+        "plugin_amount": "擴充總數",
+        "download_sum": "下載次數總和"
+      },
+      "plugin_card": {
+        "last_update": "上次更新",
+        "total_downloads": "總下載次數",
+        "release_button": {
+          "tooltip": "最新版本：v{version}",
+          "tooltip_disabled": "無發行版"
+        }
+      }
+    },
+    "plugin": {
+      "sidebar": {
+        "author": "作者",
+        "repository": "原始碼倉",
+        "homepage": "擴充主頁",
+        "last_update": "上次更新",
+        "latest_version": "最新版本",
+        "total_downloads": "總下載次數",
+        "sync_at": "資料同步於",
+        "back_button": "返回擴充列表"
+      },
+      "tabs": {
+        "introduction": "介紹",
+        "readme": "README",
+        "releases": "發行版",
+        "dependencies": "依賴"
+      },
+      "readme": {
+        "no_readme": "無README",
+        "readme_source": "README來源："
+      },
+      "releases": {
+        "download": "下載 {name} (v{version})"
+      },
+      "release": {
+        "latest_label": "最新版本",
+        "visit_release": "前往發行版源頁面",
+        "download": "下載擴充",
+        "version": "版本",
+        "date": "日期",
+        "size": "大小",
+        "downloads": "下載次數",
+        "bytes": "位元",
+        "copy_hash": "複製Hash值",
+        "copied_hash": "已複製Hash值",
+        "dependencies": "依賴",
+        "release_notes": "更新日誌",
+        "release_body_nothing": "更新日誌為空"
+      },
+      "dependencies": {
+        "meta_unavailable": "Meta資料不可用",
+        "meta_source": "Meta資料來源：{src}",
+        "meta_source_latest_release": "最新版本 {version}",
+        "meta_source_branch": "Git 的 {branch} 分支"
+      }
+    }
+  }
+}

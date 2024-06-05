@@ -1,0 +1,17 @@
+.link {
+  padding: rem(4px) rem(8px);
+  border-radius: var(--mantine-radius-sm);
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0));
+
+  &[data-active] {
+    color: light-dark(var(--mantine-primary-color-filled), var(--mantine-primary-color-3));
+  }
+}
+
+.mobileNavMenu {
+  background-color: var(--mantine-color-body);
+
+  &[data-hidden] {
+    display: none;
+  }
+}

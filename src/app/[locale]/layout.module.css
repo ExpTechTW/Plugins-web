@@ -1,0 +1,3 @@
+.mainContainer {
+  background-color: light-dark(#F9FAFB, var(--mantine-color-body));
+}

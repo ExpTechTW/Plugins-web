@@ -1,0 +1,7 @@
+.featureBackground {
+  background-color: light-dark(var(--mantine-primary-color-0), darken(var(--mantine-primary-color-2), 0.75));
+}
+
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+}
