@@ -11,15 +11,20 @@ export interface SimpleEverything {
 
 export interface SimplePlugin {
   id: string
-  name: string
-  description: string
   repos: string
   reposHome: string
   labels: string[]
   authors: AuthorInfo[]
   downloads: number
-  last_update_time: Date | undefined
+  
   latestRelease: SimpleRelease | undefined
+  name: string
+  description: string
+  tag: string[]
+  github: string
+  package_name: string
+  last_update_time: Date | undefined
+  last_plugins_update_time: string
 }
 
 export interface SimpleRelease {

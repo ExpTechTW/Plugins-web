@@ -12,7 +12,7 @@ export async function StatsCard({everything}: { everything: SimpleEverything }) 
   const t = await getTranslations('page.plugin_list.sidebar')
 
   const allPlugins = Object.values(everything.plugin_list)
-  const authorAmount = null
+  const authorAmount = allPlugins.length
   const pluginAmount = allPlugins.length
   const downloadSum = allPlugins.reduce((s, plugin) => s + 0, 0)
   const downloadSumNeat = prettyNumber(downloadSum, 1)
