@@ -8,7 +8,7 @@ import React from "react";
 
 async function PluginContentReadme({plugin}: { plugin: AllOfAPlugin }) {
   const t = await getTranslations('page.plugin.readme')
-  const readme_text = await readme_content(plugin.github)
+  const readme_text = await get_readme(plugin.github)
 
   if (!readme_text.data) {
     return <NoneText>{t('no_readme')}</NoneText>
@@ -46,7 +46,7 @@ export default async function Page({params: {pluginId, locale}}: { params: { plu
   )
 }
 
-async function readme_content(repo: string): Promise<{ data: string, url: string }> {
+async function get_readme(repo: string): Promise<{ data: string, url: string }> {
   const url = `https://raw.githubusercontent.com/${repo}/master/README.md`
   const rsp = await fetch(url)
   const data = await rsp.text()
