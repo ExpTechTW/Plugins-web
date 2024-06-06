@@ -61,7 +61,7 @@ export async function getInfo() {
   const url = `https://api.github.com/repos/${github.plugin_list[0].github}/releases`
   const rsp = await fetch(url)
   const data = await rsp.json()
-  Info = InfoData
+  Info = data
 }
 getInfo()
 

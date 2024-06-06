@@ -1,4 +1,4 @@
-import { Info, getPluginOr404 } from "@/catalogue/data";
+import { getPluginOr404 } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import GfmMarkdown from "@/components/markdown/gfm-markdown";
 import { NaLink } from "@/components/na-link";
@@ -8,10 +8,6 @@ import React from "react";
 
 async function PluginContentReadme({plugin}: { plugin: AllOfAPlugin }) {
   const t = await getTranslations('page.plugin.readme')
-
-  const readme = plugin.repository?.readme
-  let readmeUrl = plugin.repository?.readme_url
-
   const readme_text = await readme_content(plugin.github)
 
   if (!readme_text.data) {
@@ -50,9 +46,16 @@ export default async function Page({params: {pluginId, locale}}: { params: { plu
   )
 }
 
-async function readme_content(repo: (github: any) => unknown){
+async function readme_content(repo: string): Promise<{ data: string, url: string }> {
   const url = `https://raw.githubusercontent.com/${repo}/master/README.md`
   const rsp = await fetch(url)
   const data = await rsp.text()
-  return {data, url}
+  const replace = replace_hashtag(repo,data)
+
+  return { data: replace, url }
+}
+
+function replace_hashtag(repo:string,data: string){
+  const modifiedData = data.replace(/\(#([^)]+)\)/g, `(https://github.com/${repo}/#$1)`)
+  return modifiedData
 }
