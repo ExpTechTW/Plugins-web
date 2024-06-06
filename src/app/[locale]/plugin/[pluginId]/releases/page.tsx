@@ -96,7 +96,7 @@ async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
 }
 
 export default async function Page({params: {pluginId, locale}}: { params: { pluginId: string, locale: string } }) {
-  unstable_setRequestLocale(locale);
+  unstable_setRequestLocale(locale)
   const plugin = await getPluginOr404(pluginId)
 
   return (
