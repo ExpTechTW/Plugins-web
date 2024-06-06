@@ -6,6 +6,7 @@ export function createSimpleEverything(everything: Everything): SimpleEverything
     timestamp: everything.timestamp,
     authors: everything.authors,
     plugin_list: {},
+    last_update_time: everything.last_update_time,
   }
   Object.entries(everything.plugin_list).forEach(([pluginId, plugin], _) => {
     simpleEverything.plugin_list[pluginId] = createSimplePlugin(plugin, everything.authors)
@@ -38,15 +39,18 @@ export function createSimplePlugin(plugin: AllOfAPlugin, authorData: AuthorSumma
   const description = plugin.description
   return {
     id: package_name,
-    name: latestMeta?.name ?? authors,
-    description: latestMeta?.description ?? description,
     repos: `https://github.com/${github}`,
     reposHome: 'https://github.com/ExpTechTW/CDPS',
     labels: [label],
     authors: authors,
     downloads: downloads,
-    last_update_time: latestDate,
     latestRelease: latestSimpleRelease,
+    name: latestMeta?.name ?? authors,
+    description: latestMeta?.description ?? description,
+    tag: plugin.tag,
+    github: `https://github.com/${github}`,
+    package_name: latestMeta?.name ?? authors,
+    last_update_time: latestDate,
   }
 }
 

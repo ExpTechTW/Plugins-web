@@ -49,12 +49,15 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
 
   const reposPair = getGitHubReposPair(simplePlugin.repos)
   //const homepage = reposPair + ' @ ' + plugin.plugin.branch
-  const homepage = reposPair + ' @ ' + plugin.name
+  const homepage = reposPair + ' @' + plugin.name
 
   const lastUpdateText = simplePlugin.last_update_time !== undefined
     ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
     : <p className="text-mantine-gray-text">N/A</p>
-  const syncTimeText = <TimeAgoDynamic date={new Date(timestamp * 1000)} />
+  // const syncTimeText = <TimeAgoDynamic date={new Date(simplePlugin.last_update_time)} />
+  const syncTimeText = simplePlugin.last_update_time !== undefined
+  ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
+  : <p className="text-mantine-gray-text">N/A</p>
 
   return (
     <div className="mx-[8px] flex flex-col gap-5">
@@ -63,7 +66,8 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           <NaLink href={routes.plugin(simplePlugin.id)} hoverColor>
             <p className="text-2xl font-semibold">{simplePlugin.name}</p>
           </NaLink>
-          <PluginDescription description={translateLangDict(locale, simplePlugin.description) || ''} />
+          <PluginDescription description={simplePlugin.description || ''} />
+          {/* <PluginDescription description={translateLangDict(locale, simplePlugin.description) || ''} /> */}
           <div className="flex flex-row flex-wrap gap-1">
             {simplePlugin.labels.map(label => (
               <div key={label} className="">
