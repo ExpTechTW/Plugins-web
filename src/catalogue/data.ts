@@ -55,12 +55,13 @@ async function fetchEverything(): Promise<Everything> {
   // }
 }
 
+export let Info = {}
 export async function getInfo() {
   const github = await fetchEverything()
-  const url = `https://api.github.com/repos/${github.plugin_list.github}/releases`
+  const url = `https://api.github.com/repos/${github.plugin_list[0].github}/releases`
   const rsp = await fetch(url)
   const data = await rsp.json()
-  console.log(data)
+  Info = InfoData
 }
 getInfo()
 

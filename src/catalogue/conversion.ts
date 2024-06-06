@@ -1,5 +1,6 @@
 import { AllOfAPlugin, AuthorSummary, Everything, MetaInfo, ReleaseInfo } from "./meta-types";
 import { SimpleEverything, SimplePlugin, SimpleRelease } from "./simple-types";
+import {Info} from './data';
 
 export function createSimpleEverything(everything: Everything): SimpleEverything {
   const simpleEverything: SimpleEverything = {
@@ -7,6 +8,7 @@ export function createSimpleEverything(everything: Everything): SimpleEverything
     authors: everything.authors,
     plugin_list: {},
     last_update_time: everything.last_update_time,
+    simpleEverything: undefined
   }
   Object.entries(everything.plugin_list).forEach(([pluginId, plugin], _) => {
     simpleEverything.plugin_list[pluginId] = createSimplePlugin(plugin, everything.authors)
