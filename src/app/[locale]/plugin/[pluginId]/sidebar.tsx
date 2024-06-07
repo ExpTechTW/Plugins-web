@@ -62,12 +62,13 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
   const PluginInfo = await getPluginInfo(plugin.github)
   let download_count = 0
 
-  PluginInfo.forEach((release: { assets: any[]; }) => {
-    release.assets.forEach((asset: { download_count: number; }) => {
-      download_count += asset.download_count
+  if(Array.isArray(PluginInfo)){
+    PluginInfo.forEach((release: { assets: any[]; }) => {
+      release.assets.forEach((asset: { download_count: number; }) => {
+        download_count += asset.download_count
+      });
     });
-  });
-
+  }
   return (
     <div className="mx-[8px] flex flex-col gap-5">
       <CommonCard className="p-5">
