@@ -27,6 +27,7 @@ export interface AuthorSummary {
 }
 
 export interface AllOfAPlugin {
+  forEach(arg0: (element: any) => void): unknown
   last_update_time: Date | undefined
   description: any
   tag: string[]

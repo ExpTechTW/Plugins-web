@@ -1,3 +1,4 @@
+import { getInfo } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import { SimplePlugin } from "@/catalogue/simple-types";
 import { Link } from "@/common/navigation";
@@ -59,6 +60,9 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
   ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
   : <p className="text-mantine-gray-text">N/A</p>
 
+  // console.log(simplePlugin)
+  const info = await getInfo(plugin.github,plugin.package_name)
+
   return (
     <div className="mx-[8px] flex flex-col gap-5">
       <CommonCard className="p-5">
@@ -81,15 +85,15 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
       <CommonCard className="p-5">
         <div className="grid grid-cols-2 gap-3 justify-between">
           <AttributeEntry Icon={IconUser} label={t('author')} className="col-span-2">
-            <PluginAuthorList authors={simplePlugin.authors} wrap />
+            <PluginAuthorList authors={info.author[0]} wrap />
           </AttributeEntry>
           <AttributeEntry Icon={GithubIcon} label={t('repository')} className="col-span-2 break-all">
-            <NaLink href={simplePlugin.repos} className={textClass} hoverColor>
+            <NaLink href={simplePlugin.reposHome} className={textClass} hoverColor>
               <p className="line-clamp-2">{reposPair}</p>
             </NaLink>
           </AttributeEntry>
           <AttributeEntry Icon={IconLink} label={t('homepage')} className="col-span-2 break-all">
-            <NaLink href={simplePlugin.reposHome} className={textClass} hoverColor>
+            <NaLink href={simplePlugin.repos} className={textClass} hoverColor>
               <p className="line-clamp-2">{homepage}</p>
             </NaLink>
           </AttributeEntry>

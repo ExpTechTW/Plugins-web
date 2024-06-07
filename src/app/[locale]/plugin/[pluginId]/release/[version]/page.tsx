@@ -64,7 +64,7 @@ export default async function Page({params}: {params: PageParams}) {
 
   return (
     <ReleaseDisplay
-      plugin={createSimplePlugin(plugin, (await getEverything()).authors)}
+      plugin={await createSimplePlugin(plugin, (await getEverything()).authors)}
       release={release}
     />
   )

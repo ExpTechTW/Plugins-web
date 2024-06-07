@@ -1,6 +1,5 @@
 import { AllOfAPlugin, AuthorSummary, Everything, MetaInfo, ReleaseInfo } from "./meta-types";
 import { SimpleEverything, SimplePlugin, SimpleRelease } from "./simple-types";
-import {Info} from './data';
 
 export function createSimpleEverything(everything: Everything): SimpleEverything {
   const simpleEverything: SimpleEverything = {

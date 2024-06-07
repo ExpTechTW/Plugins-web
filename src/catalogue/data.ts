@@ -55,15 +55,13 @@ async function fetchEverything(): Promise<Everything> {
   // }
 }
 
-export let Info = {}
-export async function getInfo() {
-  const github = await fetchEverything()
-  const url = `https://api.github.com/repos/${github.plugin_list[0].github}/releases`
+export async function getInfo(git: (github: any) => unknown,pkg: any) {
+  const url = `https://raw.githubusercontent.com/${git}/master/${pkg}/cdps.json`
   const rsp = await fetch(url)
   const data = await rsp.json()
-  Info = data
+  return data
 }
-getInfo()
+
 
 export async function getEverything(): Promise<Everything> {
   const e = await devReadLocalEverything()

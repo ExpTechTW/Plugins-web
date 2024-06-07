@@ -11,9 +11,10 @@ import { Sidebar } from "./sidebar";
 export async function generateMetadata({params: {locale, pluginId}}: {params: {locale: string, pluginId: string}}) {
   const t = await getTranslations({locale, namespace: 'metadata.title'})
   const plugin = await getPlugin(pluginId)
+  const plugin_name = plugin ? plugin.name : undefined;
   return {
-    title: plugin
-      ? t('plugin', {name: plugin?.meta?.name || '?'})
+    title: plugin_name
+      ? t('plugin', {name: plugin?.meta?.name || plugin_name})
       : t('catalogue')
   }
 }
@@ -38,7 +39,7 @@ export default async function Layout({children, params: {locale, pluginId}}: Lay
     <CommonContentLayout>
       <LayoutScrollFix pluginId={pluginId}/>
       <div className="md:fixed md:w-sidebar-width md:h-[calc(100vh-5rem)] md:overflow-y-auto">
-        <Sidebar plugin={plugin} simplePlugin={createSimplePlugin(plugin, everything.authors)} timestamp={timestamp}/>
+        <Sidebar plugin={plugin} simplePlugin={await createSimplePlugin(plugin, everything.authors)} timestamp={timestamp}/>
       </div>
       <div className="flex md:hidden">
         <Divider className="w-full m-6" variant="dashed"/>

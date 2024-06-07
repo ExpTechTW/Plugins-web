@@ -22,16 +22,30 @@ interface PluginAuthorListProps {
 }
 
 export function PluginAuthorList({authors, wrap, textClassName, linkClassName}: PluginAuthorListProps) {
-  // return (
-  //   <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
-  //     {authors.map((author, index) =>
-  //       <div className="flex flex-row" key={index}>
-  //         <PluginAuthor author={author} className={clsx(textClassName, linkClassName)}/>
-  //         <p className={clsx("mr-1", textClassName)}>
-  //           {index < authors.length - 1 && ','}
-  //         </p>
-  //       </div>
-  //     )}
-  //   </div>
-  // )
+  let author_info = {name:authors,author:authors,link:`https://github.com/${authors}`}
+  return (
+    <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
+        <div className="flex flex-row" key="1">
+          <PluginAuthor author={author_info} className={clsx(textClassName, linkClassName)}/>
+          <p className={clsx("mr-1", textClassName)}>
+            {1 < author_info.length - 1 && ','}
+          </p>
+        </div>
+    </div>
+  )
 }
+
+// export function PluginAuthorList({authors, wrap, textClassName, linkClassName}: PluginAuthorListProps) {
+//   return (
+//     <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
+//       {authors.map((author, index) =>
+//         <div className="flex flex-row" key={index}>
+//           <PluginAuthor author={author} className={clsx(textClassName, linkClassName)}/>
+//           <p className={clsx("mr-1", textClassName)}>
+//             {index < authors.length - 1 && ','}
+//           </p>
+//         </div>
+//       )}
+//     </div>
+//   )
+// }

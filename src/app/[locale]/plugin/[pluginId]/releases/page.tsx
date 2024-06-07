@@ -1,4 +1,4 @@
-import { getPluginOr404 } from "@/catalogue/data";
+import { getInfo, getPluginOr404 } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import { NaLink } from "@/components/na-link";
 import { GithubProxySwitchServer } from "@/components/plugin/github-proxy-switch-server";
@@ -36,26 +36,52 @@ async function IconText(props: IconTextProps) {
   )
 }
 
+async function getPluginInfo(repo: (github: any) => unknown){
+  const url = `https://api.github.com/repos/${repo}/releases`
+  const rsp = await fetch(url)
+  const data = await rsp.json()
+  return data
+}
+
 async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
   const t = await getTranslations('page.plugin.releases')
+  let releases = undefined;
 
-  const releases = plugin.release?.releases || []
+  const info = await getPluginInfo(plugin.github)
 
+  if(info.message && info.message.includes('rate limit')){
+    return;
+  }
+
+  releases = info
   return (
     <ScrollArea scrollbars="x" className="w-full">
       <div className="min-w-[360px] mb-3">
         {
-          releases.map((ri) => {
-            const version = ri.meta.version
-            const date = new Date(ri.asset.created_at)
-            const href = routes.pluginRelease(plugin.plugin.id, version)
+          releases.map((ri: {
+            assets: any;
+            html_url: any;
+            created_at: string | number | Date;
+            name: any; 
+            meta: { version: any; }; 
+            asset: { 
+              created_at: string | number | Date;
+              browser_download_url: string;
+              name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; 
+              size: number; 
+              download_count: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined;
+            }; 
+}) => {
+            const version = ri.name
+            const date = new Date(ri.created_at)
+            const href = routes.pluginRelease(plugin.name, version)
             return (
               <ReleaseRow key={version} href={href}>
                 <div className="flex flex-row items-center gap-4">
                   <AssetDownloadButton
                     className="place-self-start mt-2"
-                    href={ri.asset.browser_download_url}
-                    tooltip={t('download', {name: ri.asset.name, version})}
+                    href={ri.assets[0].browser_download_url}
+                    tooltip={t('download', {name: ri.assets[0].name, version})}
                   />
 
                   <div className={clsx(
@@ -65,7 +91,7 @@ async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
                     "gap-x-2 gap-y-1",
                   )}>
                     <NaLink href={href}>
-                      <p className="font-bold">{ri.asset.name}</p>
+                      <p className="font-bold">{ri.assets[0].name}</p>
                       <IconText icon={IconTag} size="md">
                         <p>{version}</p>
                       </IconText>
@@ -77,10 +103,10 @@ async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
                       </IconText>
                       <div className="flex gap-3">
                         <IconText icon={IconWeight}>
-                          <p>{prettySize(ri.asset.size, 0)}</p>
+                          <p>{prettySize(ri.assets[0].size, 0)}</p>
                         </IconText>
                         <IconText icon={IconFileDownload}>
-                          <p>{ri.asset.download_count}</p>
+                          <p>{ri.assets[0].download_count}</p>
                         </IconText>
                       </div>
                     </NaLink>
