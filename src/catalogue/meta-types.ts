@@ -107,7 +107,7 @@ export interface AuthorSummary {
 
 export interface AllOfAPlugin {
   forEach(arg0: (element: any) => void): unknown
-  last_update_time: Date | undefined
+  last_update_time: string
   description: any
   tag: string[]
   name: any

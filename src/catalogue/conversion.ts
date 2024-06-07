@@ -17,7 +17,7 @@ export function createSimpleEverything(everything: Everything): SimpleEverything
 
 export function createSimplePlugin(plugin: AllOfAPlugin, authorData: AuthorSummary): SimplePlugin {
   let downloads = 0
-  let latestDate: Date | undefined = undefined
+  let latestDate = ""
   const releases = plugin.release?.releases || []
   downloads = 0;
   latestDate = plugin.last_update_time
