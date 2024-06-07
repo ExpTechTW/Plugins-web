@@ -2,9 +2,9 @@ import { AuthorInfo, AuthorSummary, LangDict } from "@/catalogue/meta-types";
 
 export interface SimpleEverything {
   [x: string]: any;
-  simpleEverything: any;
-  simpleEverything: any;
-  simpleEverything: any;
+  // simpleEverything: any;
+  // simpleEverything: any;
+  // simpleEverything: any;
   timestamp: number
   authors: AuthorSummary
   plugin_list: {

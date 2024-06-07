@@ -50,7 +50,7 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
 
   const reposPair = getGitHubReposPair(simplePlugin.repos)
   //const homepage = reposPair + ' @ ' + plugin.plugin.branch
-  const homepage = reposPair + ' @' + plugin.name
+  const homepage = reposPair
 
   const lastUpdateText = simplePlugin.last_update_time !== undefined
     ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
@@ -92,6 +92,7 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           <AttributeEntry Icon={IconLink} label={t('homepage')} className="col-span-2 break-all">
             <NaLink href={simplePlugin.repos} className={textClass} hoverColor>
               <p className="line-clamp-2">{homepage}</p>
+              <p className="line-clamp-2">@{info.author[0]}</p>
             </NaLink>
           </AttributeEntry>
           <AttributeEntry Icon={IconRefresh} label={t('sync_at')}>
@@ -102,13 +103,13 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           </AttributeEntry>
           <AttributeEntry Icon={IconTag} label={t('latest_version')}>
             {
-              simplePlugin.latestRelease !== undefined
+              info.version !== undefined
                 ? <NaLink
-                  href={routes.pluginRelease(simplePlugin.id, simplePlugin.latestRelease.version)}
+                  href={routes.pluginRelease(simplePlugin.id, info.version)}
                   className={textClass}
                   hoverColor
                 >
-                  {simplePlugin.latestRelease.version}
+                  {info.version}
                 </NaLink>
                 : <p className={textClass}>N/A</p>
             }
