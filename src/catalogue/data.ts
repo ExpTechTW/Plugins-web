@@ -72,6 +72,13 @@ export async function getEverything(): Promise<Everything> {
   }
 }
 
+export async function getPluginInfo(repo: (github: any) => unknown){
+  const url = `https://api.github.com/repos/${repo}/releases`
+  const rsp = await fetch(url)
+  const data = await rsp.json()
+  return data
+}
+
 
 export async function getPlugin(pluginId: string): Promise<AllOfAPlugin | undefined> {
   const everything = await getEverything()

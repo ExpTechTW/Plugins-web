@@ -1,4 +1,4 @@
-import { getInfo } from "@/catalogue/data";
+import { getInfo, getPluginInfo } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import { SimplePlugin } from "@/catalogue/simple-types";
 import { Link } from "@/common/navigation";
@@ -59,6 +59,14 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
 
   // console.log(simplePlugin)
   const info = await getInfo(plugin.github,plugin.package_name)
+  const PluginInfo = await getPluginInfo(plugin.github)
+  let download_count = 0
+
+  PluginInfo.forEach((release: { assets: any[]; }) => {
+    release.assets.forEach((asset: { download_count: number; }) => {
+      download_count += asset.download_count
+    });
+  });
 
   return (
     <div className="mx-[8px] flex flex-col gap-5">
@@ -115,7 +123,7 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
             }
           </AttributeEntry>
           <AttributeEntry Icon={IconFileDownload} label={t('total_downloads')}>
-            <p className={textClass}>{simplePlugin.downloads}</p>
+            <p className={textClass}>{download_count}</p>
           </AttributeEntry>
         </div>
       </CommonCard>

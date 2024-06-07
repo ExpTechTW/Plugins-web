@@ -1,4 +1,4 @@
-import { getInfo, getPluginOr404 } from "@/catalogue/data";
+import { getInfo, getPluginInfo, getPluginOr404 } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import { NaLink } from "@/components/na-link";
 import { GithubProxySwitchServer } from "@/components/plugin/github-proxy-switch-server";
@@ -34,13 +34,6 @@ async function IconText(props: IconTextProps) {
       {props.children}
     </div>
   )
-}
-
-async function getPluginInfo(repo: (github: any) => unknown){
-  const url = `https://api.github.com/repos/${repo}/releases`
-  const rsp = await fetch(url)
-  const data = await rsp.json()
-  return data
 }
 
 async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
