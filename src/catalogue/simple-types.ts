@@ -26,7 +26,7 @@ export interface SimplePlugin {
   tag: string[]
   github: string
   package_name: string
-  last_update_time: Date | undefined
+  last_update_time: string
 }
 
 export interface SimpleRelease {

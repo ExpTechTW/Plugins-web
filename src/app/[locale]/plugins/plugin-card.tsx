@@ -115,7 +115,7 @@ export function PluginCard({plugin}: {plugin: SimplePlugin}) {
     <PluginCardReleaseButtonDisabled/>
 
   const lastUpdateText = plugin.last_update_time !== undefined
-    ? <TimeAgoDynamic date={plugin.last_update_time}/>
+    ? <TimeAgoDynamic date={new Date(plugin.last_update_time)}/>
     : <p>N/A</p>
   return (
     <CommonCard className="flex flex-col">

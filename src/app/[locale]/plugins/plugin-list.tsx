@@ -29,7 +29,7 @@ export function PluginList({everything}: {everything: SimpleEverything}) {
       if (ds.sortOrder === 'downloads' || !ds.sortOrder && 'downloads' == sortOrderDefault) {
         ret = b.downloads - a.downloads;
       } else if (ds.sortOrder === 'recentUpdate' || !ds.sortOrder && 'recentUpdate' == sortOrderDefault) {
-        ret = dateToTimestamp(b.last_update_time) - dateToTimestamp(a.last_update_time)
+        ret = dateToTimestamp(new Date(b.last_update_time)) - dateToTimestamp(new Date(a.last_update_time))
       } else {
         ret = a.name.localeCompare(b.name);
       }
