@@ -48,9 +48,9 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
 
   const textClass = 'overflow-hidden overflow-ellipsis break-words'
 
-  const reposPair = getGitHubReposPair(simplePlugin.repos)
+  const reposPair = getGitHubReposPair(simplePlugin.reposHome)
   //const homepage = reposPair + ' @ ' + plugin.plugin.branch
-  const homepage = reposPair
+  const homepage = getGitHubReposPair(simplePlugin.repos)
 
   const lastUpdateText = simplePlugin.last_update_time !== undefined
     ? <TimeAgoDynamic date={simplePlugin.last_update_time} />
