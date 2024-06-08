@@ -1,5 +1,5 @@
 import { createSimplePlugin } from "@/catalogue/conversion";
-import { getEverything, getInfo, getPlugin, getPluginOr404, getSimpleEverything } from "@/catalogue/data";
+import { getEverything, getInfo, getPlugin, getPluginInfo, getPluginOr404, getSimpleEverything } from "@/catalogue/data";
 import { AllOfAPlugin, ReleaseInfo } from "@/catalogue/meta-types";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -11,11 +11,13 @@ interface PageParams {
   version: string
 }
 
-function getRelease(plugin: AllOfAPlugin, version: string): ReleaseInfo | undefined {
-  if (plugin.release) {
-    return plugin.release.releases.filter(r => r.meta.version === version)[0]
+async function getRelease(plugin: AllOfAPlugin, version: string): Promise<ReleaseInfo | undefined> {
+  const releases = await getPluginInfo(plugin.github);
+  if (releases && releases.length > 0) {
+    const release = releases.find(r => r.tag_name === version);
+    return release;
   } else {
-    return undefined
+    return undefined;
   }
 }
 
@@ -27,7 +29,7 @@ export async function generateMetadata({params}: {params: PageParams}) {
   if (plugin) {
     const version = decodeURIComponent(params.version)
     const pluginName = plugin?.meta?.name || '?'
-    if (getRelease(plugin, version)) {
+    if (await getRelease(plugin, version)) {
       title = t('plugin_release', {
         name: pluginName,
         version: version,
@@ -41,6 +43,7 @@ export async function generateMetadata({params}: {params: PageParams}) {
 }
 
 export async function generateStaticParams({params}: {params: {pluginId: string}}) {
+  // console.log('dsasad',params)
   const plugin = await getPluginOr404(params.pluginId)
   if (plugin.release) {
     return plugin.release.releases.map(r => {
@@ -60,7 +63,7 @@ export default async function Page({params}: {params: PageParams}) {
   const everything = await getSimpleEverything()
   const plugin_info = everything.plugin_list[params.pluginId]
   const info = await getInfo(plugin_info.github,plugin_info.package_name)
-  const release = getRelease(plugin, version)
+  const release = await getRelease(plugin, version)
   if (!release) {
     notFound()
   }

@@ -20,8 +20,10 @@ export async function generateMetadata({params: {locale, pluginId}}: {params: {l
 }
 
 export async function generateStaticParams() {
-  const everything = await getEverything()
-  return Object.keys(everything.plugin_list).map(pluginId => ({pluginId}))
+  const everything = await getEverything();
+  return everything.plugin_list.map((plugin: { name: any; }) => ({
+    pluginId: plugin.name
+  }));
 }
 
 interface LayoutProps {
