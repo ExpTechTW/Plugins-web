@@ -11,14 +11,11 @@ import { PluginAuthorList } from "@/components/plugin/plugin-author";
 import { PluginLabel } from "@/components/plugin/plugin-label";
 import { TimeAgoDynamic } from "@/components/time-ago-dynamic";
 import { routes } from "@/site/routes";
-import { translateLangDict } from "@/utils/i18n-utils";
 import { getGitHubReposPair } from "@/utils/repos-utils";
 import { Button } from "@mantine/core";
 import { IconArrowBackUp, IconFileDownload, IconLink, IconRefresh, IconReload, IconTag, IconUser } from "@tabler/icons-react";
-import { useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import React from "react";
-import { useTranslation } from 'react-i18next';
 
 async function SidebarBackButton() {
   const t = await getTranslations('page.plugin.sidebar')

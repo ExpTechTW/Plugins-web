@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": {
+      "catalogue": "拡張機能リスト",
+      "plugin": "{name} - 拡張機能リスト",
+      "plugin_release": "{name} v{version} - 拡張機能リスト"
+    }
+  },
+  "layout": {
+    "nav_bar": {
+      "navigation": {
+        "home": "ホーム",
+        "plugins": "拡張機能リスト",
+        "docs": "技術文献"
+      },
+      "locale_switch": {
+        "en": "English",
+        "zh-TW": "繁體中文",
+        "ja": "日本語"
+      }
+    }
+  },
+  "component": {
+    "pip_install_code_highlight": {
+      "copy": "ソースコードをコピーする",
+      "copied": "コピー"
+    },
+    "plugin_label": {
+      "info": "インフォメーション",
+      "tool": "工具",
+      "management": "管理",
+      "api": "API",
+      "__unknown": "不明"
+    },
+    "plugin_dependencies": {
+      "title_plugin": "CDPS拡張機能の依存関係",
+      "title_package": "Pythonスイートの依存関係",
+      "plugin_id": "拡張ID",
+      "py_package": "Pythonスイート",
+      "requirement": "依存関係バージョン",
+      "none": "無",
+      "py_package_command": "Pythonパッケージのインストールコマンド"
+    },
+    "github_proxy_switch": {
+      "label": "GitHub Proxyによる高速化",
+      "tooltip": "中国でのダウンロード速度を最適化するには、https://mirror.ghproxy.com/。"
+    }
+  },
+  "page": {
+    "home": {
+      "description": "複合防災サーバー",
+      "catalogue": "拡張された機能を探る",
+      "docs": "技術文献を読む",
+      "github": "GitHub"
+    },
+    "plugin_list": {
+      "sidebar": {
+        "plugin_filter": "拡張フィルター",
+        "plugin_filter_name": "拡張ID / 拡張名",
+        "plugin_filter_author": "拡張機能の著者",
+        "label_filter": "ラベルで絞り込む",
+        "sort_order": "並べ替え",
+        "sort_order_type": {
+          "name": "拡張名",
+          "downloads": "ダウンロード数",
+          "recentUpdate": "最終更新"
+        },
+        "sort_order_desc": {
+          "name": "拡張名",
+          "downloads": "ダウンロード数",
+          "recentUpdate": "最終更新"
+        },
+        "sort_reversed": "ソート逆",
+        "stats": "統計",
+        "sync_at": "同期時間",
+        "author_amount": "著者総数",
+        "plugin_amount": "拡張機能総数",
+        "download_sum": "ダウンロード数"
+      },
+      "plugin_card": {
+        "last_update": "最終更新",
+        "total_downloads": "ダウンロード数",
+        "release_button": {
+          "tooltip": "新バージョン：v{version}",
+          "tooltip_disabled": "リリースなし"
+        }
+      }
+    },
+    "plugin": {
+      "sidebar": {
+        "author": "著者",
+        "repository": "ソースコードウェアハウス",
+        "homepage": "擴充ホーム",
+        "last_update": "最終更新",
+        "latest_version": "最新バージョン",
+        "total_downloads": "ダウンロード数",
+        "sync_at": "同期時間",
+        "back_button": "返回拡張機能リスト"
+      },
+      "tabs": {
+        "introduction": "紹介",
+        "readme": "README",
+        "releases": "リリース",
+        "dependencies": "依存関係"
+      },
+      "readme": {
+        "no_readme": "Readme無し",
+        "readme_source": "readmeソース："
+      },
+      "releases": {
+        "download": "ダウンロード {name} (v{version})"
+      },
+      "release": {
+        "latest_label": "最新バージョン",
+        "visit_release": "リリースソースページへ",
+        "download": "ダウンロード拡張機能",
+        "version": "バージョン",
+        "date": "日付",
+        "size": "サイズ",
+        "downloads": "ダウンロード数",
+        "bytes": "バイテス",
+        "copy_hash": "コピーハッシュ",
+        "copied_hash": "コピーハッシュの成功 ",
+        "dependencies": "依存関係",
+        "release_notes": "更新ログ",
+        "release_body_nothing": "更新ログ空"
+      },
+      "dependencies": {
+        "meta_unavailable": "メタデータは使用できない",
+        "meta_source": "メタデータソース：{src}",
+        "meta_source_latest_release": "最新バージョン {version}",
+        "meta_source_branch": "Gitの{branch}ブランチ"
+      }
+    }
+  }
+}

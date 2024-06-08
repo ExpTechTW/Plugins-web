@@ -3,6 +3,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
 import 'dayjs/locale/zh-tw'
+import 'dayjs/locale/ja'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(relativeTime)

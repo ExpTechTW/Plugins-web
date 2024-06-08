@@ -20,6 +20,7 @@ export const siteConfig = {
   languages: [
     'en',
     'zh-TW',
+    'ja',
   ],
   defaultLanguage: 'en',
 }

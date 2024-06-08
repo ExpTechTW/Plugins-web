@@ -15,7 +15,8 @@
       },
       "locale_switch": {
         "en": "English",
-        "zh-TW": "繁體中文"
+        "zh-TW": "繁體中文",
+        "ja": "日本語"
       }
     }
   },

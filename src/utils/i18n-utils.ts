@@ -35,6 +35,7 @@ export function pick(messages: AbstractIntlMessages, keys: string | string[]): A
 const localeToMcdrLang: {[locale: string]: string} = {
   'en': 'en_us',
   'zh-TW': 'zh_tw',
+  'ja': 'ja',
 }
 
 export function translateLangDict(locale: string, message: LangDict, englishFallback: boolean = true): string | undefined {
