@@ -11,11 +11,17 @@ import { CardSection, SidebarCard } from "./sidebar-common";
 export async function StatsCard({everything}: { everything: SimpleEverything }) {
   const t = await getTranslations('page.plugin_list.sidebar')
 
+  let downloadSum = 0;
+
+  for (const [pluginId, plugin] of Object.entries(everything.plugin_list)) {
+    downloadSum = downloadSum + plugin.downloads
+  }
+
   const allPlugins = Object.values(everything.plugin_list)
   const authorAmount = allPlugins.length
   const pluginAmount = allPlugins.length
-  const downloadSum = allPlugins.reduce((s, plugin) => s + 0, 0)
-  const downloadSumNeat = prettyNumber(downloadSum, 1)
+  // const downloadSum = allPlugins.reduce((s, plugin) => s + 0, 0)
+  const downloadSumNeat = prettyNumber(downloadSum, 0)
 
   return (
     <SidebarCard>

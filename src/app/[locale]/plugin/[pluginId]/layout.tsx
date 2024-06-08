@@ -1,5 +1,5 @@
 import { createSimplePlugin } from "@/catalogue/conversion";
-import { getEverything, getPlugin, getPluginOr404 } from "@/catalogue/data";
+import { getEverything, getInfo, getPlugin, getPluginOr404, getSimpleEverything } from "@/catalogue/data";
 import { CommonContentLayout } from "@/components/layout/common-content-layout";
 import { Divider } from "@mantine/core";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
@@ -32,14 +32,15 @@ interface LayoutProps {
 export default async function Layout({children, params: {locale, pluginId}}: LayoutProps) {
   unstable_setRequestLocale(locale)
   const plugin = await getPluginOr404(pluginId)
-  const everything = await getEverything()
-  const timestamp = everything.timestamp
+  const everything = await getSimpleEverything()
+  const timestamp = everything.last_update_time
+  const plugin_info = everything.plugin_list[pluginId]
 
   return (
     <CommonContentLayout>
       <LayoutScrollFix pluginId={pluginId}/>
       <div className="md:fixed md:w-sidebar-width md:h-[calc(100vh-5rem)] md:overflow-y-auto">
-        <Sidebar plugin={plugin} simplePlugin={await createSimplePlugin(plugin, everything.authors)} timestamp={timestamp}/>
+        <Sidebar plugin={plugin} simplePlugin={plugin_info} timestamp={timestamp}/>
       </div>
       <div className="flex md:hidden">
         <Divider className="w-full m-6" variant="dashed"/>

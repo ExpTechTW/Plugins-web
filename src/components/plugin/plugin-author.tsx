@@ -15,37 +15,37 @@ export function PluginAuthor({author, className}: {author: AuthorInfo, className
 }
 
 interface PluginAuthorListProps {
-  authors: string
+  authors: AuthorInfo[]
   wrap?: boolean
   textClassName?: string
   linkClassName?: string
 }
 
-export function PluginAuthorList({authors, wrap, textClassName, linkClassName}: PluginAuthorListProps) {
-  let author_info = {name:authors,link:`https://github.com/${authors}`}
-  return (
-    <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
-        <div className="flex flex-row" key="1">
-          <PluginAuthor author={author_info} className={clsx(textClassName, linkClassName)}/>
-          {/* <p className={clsx("mr-1", textClassName)}>
-            {1 < author_info.length - 1 && ','}
-          </p> */}
-        </div>
-    </div>
-  )
-}
-
 // export function PluginAuthorList({authors, wrap, textClassName, linkClassName}: PluginAuthorListProps) {
+//   // let author_info = {name:authors,link:`https://github.com/${authors}`}
 //   return (
 //     <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
-//       {authors.map((author, index) =>
-//         <div className="flex flex-row" key={index}>
-//           <PluginAuthor author={author} className={clsx(textClassName, linkClassName)}/>
+//         <div className="flex flex-row" key="1">
+//           <PluginAuthor author={authors} className={clsx(textClassName, linkClassName)}/>
 //           <p className={clsx("mr-1", textClassName)}>
-//             {index < authors.length - 1 && ','}
+//             {1 < authors.length - 1 && ','}
 //           </p>
 //         </div>
-//       )}
 //     </div>
 //   )
 // }
+
+export function PluginAuthorList({authors, wrap, textClassName, linkClassName}: PluginAuthorListProps) {
+  return (
+    <div className={clsx("flex flex-row", wrap && "flex-wrap")}>
+      {authors.map((author, index) =>
+        <div className="flex flex-row" key={index}>
+          <PluginAuthor author={author} className={clsx(textClassName, linkClassName)}/>
+          <p className={clsx("mr-1", textClassName)}>
+            {index < authors.length - 1 && ','}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}

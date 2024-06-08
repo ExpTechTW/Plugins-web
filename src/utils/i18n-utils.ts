@@ -34,7 +34,6 @@ export function pick(messages: AbstractIntlMessages, keys: string | string[]): A
 
 const localeToMcdrLang: {[locale: string]: string} = {
   'en': 'en_us',
-  'zh-CN': 'zh_cn',
   'zh-TW': 'zh_tw',
 }
 

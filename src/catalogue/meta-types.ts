@@ -19,7 +19,7 @@ export interface Releases {
   prerelease: boolean
   created_at: string
   published_at: string
-  assets: [ReleasesAsset]
+  assets: ReleasesAsset[]
   tarball_url: string
   zipball_url: string
   body: string
@@ -84,13 +84,32 @@ export interface ReleasesUploader {
 }
 
 export interface Everything {
+  // github(github: any): unknown
+  // timestamp: number
+  // authors: AuthorSummary
   last_update_time: string
-  github(github: any): unknown
-  timestamp: number
-  authors: AuthorSummary
   plugin_list: {
     [key: string]: AllOfAPlugin
   }
+}
+
+export interface cdps_json {
+  version: string
+  "pre-load": boolean
+  "focus-load": boolean
+  name: string
+  description: {
+    [key: string]: string
+  }
+  author: string[]
+  dependencies: {
+    [key: string]: string
+  }
+  pip_dependencies: {
+    [key: string]: string
+  }
+  resources: string[]
+  link: string
 }
 
 export interface AuthorInfo {
@@ -106,13 +125,14 @@ export interface AuthorSummary {
 }
 
 export interface AllOfAPlugin {
-  forEach(arg0: (element: any) => void): unknown
-  last_update_time: string
-  description: any
+  name: string
+  description: string
   tag: string[]
-  name: any
-  package_name: any
-  github(github: any): unknown
+  github: string
+  package_name: string
+  last_update_time: string
+  // forEach(arg0: (element: any) => void): unknown
+  // github(github: any): unknown
   meta: MetaInfo | null
   plugin: PluginInfo
   release: ReleaseSummary | null
