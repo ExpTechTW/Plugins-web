@@ -1,0 +1,8 @@
+services:
+  p2padmin:
+    container_name: p2padmin
+    image: p2padmin
+    # ports:
+    #   - "1015:1015/udp"
+    restart: on-failure
+    network_mode: host
