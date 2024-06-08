@@ -17,7 +17,7 @@ export async function PluginContentIntroduction({plugin}: { plugin: AllOfAPlugin
   )
 }
 
-async function get_content(repo: string,pkg:string): Promise<{ data: string, url: string }> {
+async function get_content(repo: string,pkg:string): Promise<string> {
   const url = `https://raw.githubusercontent.com/${repo}/master/${pkg}/cdps.json`
   const rsp = await fetch(url)
   const data = await rsp.json()

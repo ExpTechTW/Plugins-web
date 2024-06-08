@@ -1,4 +1,4 @@
-import { AllOfAPlugin, Everything } from "@/catalogue/meta-types"
+import { AllOfAPlugin, Everything, Releases, cdps_json } from "@/catalogue/meta-types"
 import { SimpleEverything } from "@/catalogue/simple-types"
 import fs from 'fs/promises'
 import { notFound } from "next/navigation"
@@ -55,11 +55,23 @@ async function fetchEverything(): Promise<Everything> {
   // }
 }
 
-export async function getInfo(git: (github: any) => unknown,pkg: any) {
-  const url = `https://raw.githubusercontent.com/${git}/master/${pkg}/cdps.json`
-  const rsp = await fetch(url)
-  const data = await rsp.json()
-  return data
+export async function getInfo(github: string, pkg: string): Promise<cdps_json> {
+  const url = `https://raw.githubusercontent.com/${github}/master/${pkg}/cdps.json`;
+  const rsp = await fetch(url, {
+    next: {
+      revalidate: 10 * 60, // ISR 10min
+      tags: ['catalogue'],
+    }
+  });
+
+  if (!rsp.ok) {
+    // 處理錯誤回應
+    console.log(url)
+    console.log(`HTTP error! status: ${rsp.status}`)
+  }
+
+  const data = await rsp.json();
+  return data;
 }
 
 
@@ -72,9 +84,14 @@ export async function getEverything(): Promise<Everything> {
   }
 }
 
-export async function getPluginInfo(repo: (github: any) => unknown){
-  const url = `https://api.github.com/repos/${repo}/releases`
-  const rsp = await fetch(url)
+export async function getPluginInfo(github: string): Promise<Releases[]>{
+  const url = `https://api.github.com/repos/${github}/releases`
+  const rsp = await fetch(url, {
+    next: {
+      revalidate: 10 * 60,  // ISR 10min
+      tags: ['catalogue'],
+    }
+  })
   const data = await rsp.json()
   return data
 }
@@ -83,7 +100,7 @@ export async function getPluginInfo(repo: (github: any) => unknown){
 export async function getPlugin(pluginId: string): Promise<AllOfAPlugin | undefined> {
   const everything = await getEverything()
   const plugin_list: AllOfAPlugin[] = Object.values(everything.plugin_list)
-  return plugin_list.find(plugin => plugin.name === pluginId)
+  return plugin_list.find(plugin => plugin.package_name === pluginId)
 }
 
 export async function getPluginOr404(pluginId: string): Promise<AllOfAPlugin> {

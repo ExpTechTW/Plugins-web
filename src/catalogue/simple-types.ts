@@ -1,16 +1,12 @@
 import { AuthorInfo, AuthorSummary, LangDict } from "@/catalogue/meta-types";
 
 export interface SimpleEverything {
-  [x: string]: any;
-  // simpleEverything: any;
-  // simpleEverything: any;
-  // simpleEverything: any;
-  timestamp: number
-  authors: AuthorSummary
+  // timestamp: number
+  // authors: AuthorSummary
+  last_update_time: string
   plugin_list: {
     [key: string]: SimplePlugin
   }
-  last_update_time: string
 }
 
 export interface SimplePlugin {
@@ -27,6 +23,7 @@ export interface SimplePlugin {
   github: string
   package_name: string
   last_update_time: string
+  version: string
 }
 
 export interface SimpleRelease {

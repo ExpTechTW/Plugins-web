@@ -1,5 +1,5 @@
 import { createSimplePlugin } from "@/catalogue/conversion";
-import { getEverything, getPlugin, getPluginOr404 } from "@/catalogue/data";
+import { getEverything, getInfo, getPlugin, getPluginOr404, getSimpleEverything } from "@/catalogue/data";
 import { AllOfAPlugin, ReleaseInfo } from "@/catalogue/meta-types";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -57,6 +57,9 @@ export default async function Page({params}: {params: PageParams}) {
   const version = decodeURIComponent(params.version)
 
   const plugin = await getPluginOr404(params.pluginId)
+  const everything = await getSimpleEverything()
+  const plugin_info = everything.plugin_list[params.pluginId]
+  const info = await getInfo(plugin_info.github,plugin_info.package_name)
   const release = getRelease(plugin, version)
   if (!release) {
     notFound()
@@ -64,7 +67,7 @@ export default async function Page({params}: {params: PageParams}) {
 
   return (
     <ReleaseDisplay
-      plugin={await createSimplePlugin(plugin, (await getEverything()).authors)}
+      plugin={createSimplePlugin(plugin, info)}
       release={release}
     />
   )

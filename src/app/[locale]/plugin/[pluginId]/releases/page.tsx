@@ -1,5 +1,5 @@
-import { getInfo, getPluginInfo, getPluginOr404 } from "@/catalogue/data";
-import { AllOfAPlugin } from "@/catalogue/meta-types";
+import { getPluginInfo, getPluginOr404 } from "@/catalogue/data";
+import { AllOfAPlugin, Releases } from "@/catalogue/meta-types";
 import { NaLink } from "@/components/na-link";
 import { GithubProxySwitchServer } from "@/components/plugin/github-proxy-switch-server";
 import { TimeFormatted } from "@/components/time-formatted";
@@ -42,29 +42,16 @@ async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
 
   const info = await getPluginInfo(plugin.github)
 
-  if(info.message && info.message.includes('rate limit')){
-    return;
-  }
+  // if(info.message && info.message.includes('rate limit')){
+  //   return;
+  // }
 
   releases = info
   return (
     <ScrollArea scrollbars="x" className="w-full">
       <div className="min-w-[360px] mb-3">
         {
-          releases.map((ri: {
-            assets: any;
-            html_url: any;
-            created_at: string | number | Date;
-            name: any; 
-            meta: { version: any; }; 
-            asset: { 
-              created_at: string | number | Date;
-              browser_download_url: string;
-              name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; 
-              size: number; 
-              download_count: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined;
-            }; 
-}) => {
+          releases.map((ri: Releases) => {
             const version = ri.name
             const date = new Date(ri.created_at)
             const href = routes.pluginRelease(plugin.name, version)

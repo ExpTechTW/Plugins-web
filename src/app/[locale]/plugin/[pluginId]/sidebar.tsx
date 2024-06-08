@@ -1,5 +1,5 @@
 import { getInfo, getPluginInfo } from "@/catalogue/data";
-import { AllOfAPlugin } from "@/catalogue/meta-types";
+import { AllOfAPlugin, ReleasesAsset } from "@/catalogue/meta-types";
 import { SimplePlugin } from "@/catalogue/simple-types";
 import { Link } from "@/common/navigation";
 import { AttributeEntry } from "@/components/attribute-entry";
@@ -42,8 +42,8 @@ async function PluginDescription({ description }: { description: string }) {
   )
 }
 
-export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: AllOfAPlugin, simplePlugin: SimplePlugin, timestamp: number }) {
-  const locale = useLocale()
+export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: AllOfAPlugin, simplePlugin: SimplePlugin, timestamp: string }) {
+  // const locale = useLocale()
   const t = await getTranslations('page.plugin.sidebar')
 
   const textClass = 'overflow-hidden overflow-ellipsis break-words'
@@ -58,12 +58,12 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
   const syncTimeText = <TimeAgoDynamic date={new Date(Date.now())} />
 
   // console.log(simplePlugin)
-  const info = await getInfo(plugin.github,plugin.package_name)
-  const PluginInfo = await getPluginInfo(plugin.github)
+  // const info = await getInfo(plugin.github,plugin.package_name)
+  const PluginInfo = await getPluginInfo(simplePlugin.github)
   let download_count = 0
 
   if(Array.isArray(PluginInfo)){
-    PluginInfo.forEach((release: { assets: any[]; }) => {
+    PluginInfo.forEach((release: { assets: ReleasesAsset[]; }) => {
       release.assets.forEach((asset: { download_count: number; }) => {
         download_count += asset.download_count
       });
@@ -91,7 +91,7 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
       <CommonCard className="p-5">
         <div className="grid grid-cols-2 gap-3 justify-between">
           <AttributeEntry Icon={IconUser} label={t('author')} className="col-span-2">
-            <PluginAuthorList authors={info.author[0]} wrap />
+            <PluginAuthorList authors={simplePlugin.authors} wrap />
           </AttributeEntry>
           <AttributeEntry Icon={GithubIcon} label={t('repository')} className="col-span-2 break-all">
             <NaLink href={simplePlugin.reposHome} className={textClass} hoverColor>
@@ -101,7 +101,7 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           <AttributeEntry Icon={IconLink} label={t('homepage')} className="col-span-2 break-all">
             <NaLink href={simplePlugin.repos} className={textClass} hoverColor>
               <p className="line-clamp-2">{homepage}</p>
-              <p className="line-clamp-2">@{info.author[0]}</p>
+              {/* <p className="line-clamp-2">@{info.author[0]}</p> */}
             </NaLink>
           </AttributeEntry>
           <AttributeEntry Icon={IconRefresh} label={t('sync_at')}>
@@ -112,14 +112,15 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           </AttributeEntry>
           <AttributeEntry Icon={IconTag} label={t('latest_version')}>
             {
-              info.version !== undefined
-                ? <NaLink
-                  href={routes.pluginRelease(simplePlugin.id, info.version)}
-                  className={textClass}
-                  hoverColor
-                >
-                  {info.version}
-                </NaLink>
+              simplePlugin.version !== undefined
+                // ? <NaLink
+                //   href={routes.pluginRelease(simplePlugin.id, info.version)}
+                //   className={textClass}
+                //   hoverColor
+                // >
+                //   {info.version}
+                // </NaLink>
+                ? <p className={textClass}>{simplePlugin.version}</p>
                 : <p className={textClass}>N/A</p>
             }
           </AttributeEntry>
