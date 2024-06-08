@@ -58,7 +58,6 @@ export async function PluginRequirementTable({dependencies}: {dependencies: {[_:
         <TableTbody>
           {Object.entries(dependencies).map(([pluginId, requirement], index) => {
             const id = pluginId.match(/^[a-zA-Z0-9_]+$/)?.toString()
-            console.log(siteConfig)
             let pluginUrl: string | undefined
             if (id === 'cdps') {
               pluginUrl = siteConfig.links.githubMcdr
