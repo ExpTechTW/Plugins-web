@@ -16,7 +16,7 @@ export interface SimplePlugin {
   labels: string[]
   authors: AuthorInfo[]
   downloads: number
-  latestRelease: SimpleRelease | undefined
+  latestRelease: SimpleRelease
   name: string
   description: string
   tag: string[]

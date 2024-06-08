@@ -1,5 +1,5 @@
-import { getInfo } from "./data";
-import { AllOfAPlugin, AuthorSummary, Everything, MetaInfo, ReleaseInfo, cdps_json } from "./meta-types";
+import { getInfo, getPluginInfo } from "./data";
+import { AllOfAPlugin, AuthorSummary, Everything, MetaInfo, ReleaseInfo, Releases, ReleasesAsset, cdps_json } from "./meta-types";
 import { SimpleEverything, SimplePlugin, SimpleRelease } from "./simple-types";
 
 export async function createSimpleEverything(everything: Everything): Promise<SimpleEverything> {
@@ -12,17 +12,25 @@ export async function createSimpleEverything(everything: Everything): Promise<Si
 
   for (const [pluginId, plugin] of Object.entries(everything.plugin_list)) {
     const info = await getInfo(plugin.github, plugin.package_name);
-    simpleEverythingTemp.plugin_list[plugin.package_name] = createSimplePlugin(plugin, info);
+    const PluginInfo = await getPluginInfo(plugin.github)
+    simpleEverythingTemp.plugin_list[plugin.package_name] = createSimplePlugin(plugin, info, PluginInfo);
   }
 
   return simpleEverythingTemp;
 }
 
-export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json): SimplePlugin {
+export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json, PluginInfo: Releases[]): SimplePlugin {
   let downloads = 0
   // let latestDate = ""
-  const releases = plugin.release?.releases || []
-  downloads = 0;
+  // const releases = plugin.release?.releases || []
+
+  if(Array.isArray(PluginInfo)){
+    PluginInfo.forEach((release: { assets: ReleasesAsset[]; }) => {
+      release.assets.forEach((asset: { download_count: number; }) => {
+        downloads += asset.download_count
+      });
+    });
+  }
   // latestDate = plugin.last_update_time
   // releases.forEach(r => {
   //   downloads += r.asset.download_count
@@ -31,8 +39,8 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json): Simpl
   //     latestDate = date
   //   }
   // })
-  const latestRelease: ReleaseInfo | undefined = releases[plugin.release?.latest_version_index ?? -1]
-  const latestSimpleRelease: SimpleRelease | undefined = latestRelease === undefined ? undefined : createSimpleRelease(latestRelease)
+  // const latestRelease: ReleaseInfo | undefined = releases[plugin.release?.latest_version_index ?? -1]
+  // const latestSimpleRelease: SimpleRelease | undefined = latestRelease === undefined ? undefined : createSimpleRelease(latestRelease)
 
   // const latestMeta: MetaInfo | undefined = latestRelease?.meta || plugin.meta || undefined
 
@@ -51,7 +59,13 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json): Simpl
       link: `https://github.com/${info.author[0]}`,
     }],
     downloads: downloads,
-    latestRelease: latestSimpleRelease,
+    // latestRelease: latestSimpleRelease,
+    latestRelease: {
+      version: PluginInfo[0].tag_name,
+      url: PluginInfo[0].url,
+      assetName: PluginInfo[0].assets[0].name,
+      assetUrl: PluginInfo[0].assets[0].browser_download_url,
+    },
     name: plugin.name,
     description: plugin.description,
     tag: plugin.tag,
@@ -65,7 +79,7 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json): Simpl
 
 export function createSimpleRelease(release: ReleaseInfo): SimpleRelease {
   return {
-    version: release.meta.version,
+    version: release.tag_name,
     url: release.url,
     assetName: release.asset.name,
     assetUrl: release.asset.browser_download_url,

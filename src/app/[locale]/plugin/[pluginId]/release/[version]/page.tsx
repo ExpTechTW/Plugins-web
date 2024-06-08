@@ -67,7 +67,7 @@ export default async function Page({params}: {params: PageParams}) {
 
   return (
     <ReleaseDisplay
-      plugin={createSimplePlugin(plugin, info)}
+      plugin={plugin_info}
       release={release}
     />
   )

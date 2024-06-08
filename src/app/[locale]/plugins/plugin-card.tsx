@@ -34,9 +34,9 @@ function PluginCardReleaseButton({pluginId, release, variant = 'filled'}: Plugin
         aria-label={tooltip}
         className={clsx(variant === 'filled' && 'text-mantine-icon-white')}
       >
-        {/* <NaLink href={routes.pluginRelease(pluginId, release.version)}>
+        <NaLink href={routes.pluginRelease(pluginId, release.version)}>
           <IconTag stroke={1.5}/>
-        </NaLink> */}
+        </NaLink>
       </ActionIcon>
     </ClickableTooltip>
   )
