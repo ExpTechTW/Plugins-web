@@ -113,7 +113,7 @@
       "release": {
         "latest_label": "最新バージョン",
         "visit_release": "リリースソースページへ",
-        "download": "ダウンロード拡張機能",
+        "download": "ダウンロード",
         "version": "バージョン",
         "date": "日付",
         "size": "サイズ",
