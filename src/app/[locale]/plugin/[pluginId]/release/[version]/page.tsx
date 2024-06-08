@@ -43,7 +43,6 @@ export async function generateMetadata({params}: {params: PageParams}) {
 }
 
 export async function generateStaticParams({params}: {params: {pluginId: string}}) {
-  // console.log('dsasad',params)
   const plugin = await getPluginOr404(params.pluginId)
   if (plugin.release) {
     return plugin.release.releases.map(r => {
