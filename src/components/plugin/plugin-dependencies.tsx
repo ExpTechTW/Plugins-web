@@ -87,6 +87,7 @@ export async function PluginRequirementTable({dependencies}: {dependencies: {[_:
 
 export async function PackageRequirementTable({requirements}: {requirements: {[_: string]: string}}) {
   const t = await getTranslations('component.plugin_dependencies')
+  console.log(requirements)
   return (
     <div>
       <SectionTitle className="mb-2">{t('title_package')}</SectionTitle>
@@ -137,7 +138,7 @@ export async function PluginDependenciesAll({meta}: { meta: cdps_json }) {
     <div className="flex flex-col gap-5">
       <div className="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 gap-5">
         <PluginRequirementTable dependencies={meta.dependencies}/>
-        <PackageRequirementTable requirements={meta.pip_dependencies}/>
+        <PackageRequirementTable requirements={meta.pip_dependencies ? meta.pip_dependencies : {}}/>
       </div>
       {requirement.length > 0 && <PluginRequirementsPipCodeBlock requirements={requirement}/>}
     </div>
