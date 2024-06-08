@@ -104,8 +104,8 @@
         "dependencies": "依存関係"
       },
       "readme": {
-        "no_readme": "Readme無し",
-        "readme_source": "readmeソース："
+        "no_readme": "README無し",
+        "readme_source": "READMEソース："
       },
       "releases": {
         "download": "ダウンロード {name} (v{version})"
