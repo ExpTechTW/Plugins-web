@@ -1,4 +1,4 @@
-import { ReleaseInfo } from "@/catalogue/meta-types";
+import { ReleaseInfo, Releases } from "@/catalogue/meta-types";
 import { SimplePlugin } from "@/catalogue/simple-types";
 import { AttributeEntry } from "@/components/attribute-entry";
 import { ClickableTooltip } from "@/components/clickable-tooltip";
@@ -16,8 +16,8 @@ import React from "react";
 import { DownloadSectionButton } from "./download-section-button";
 import { HashCopyButtonServer } from "./hash-copy-button-server";
 import { ProxyableDownloadButton } from "./proxyable-download-button";
-import md5 from 'js-md5';
-import { SHA256 } from 'crypto-js';
+// import md5 from 'js-md5';
+// import { SHA256 } from 'crypto-js';
 import { getInfo } from "@/catalogue/data";
 
 async function HashDisplay({kind, hash}: {kind: string, hash: string}) {
@@ -32,11 +32,11 @@ async function HashDisplay({kind, hash}: {kind: string, hash: string}) {
   )
 }
 
-async function DownloadSection({release, className}: { release: ReleaseInfo, className?: string }) {
+async function DownloadSection({release, className}: { release: Releases, className?: string }) {
   const t = await getTranslations('page.plugin.release')
   const assets = release.assets[0]
-  const encrypted = md5(assets.id.toString());
-  const hashSHA256 = SHA256(assets.id.toString()).toString()
+  // const encrypted = md5(assets.id.toString());
+  // const hashSHA256 = SHA256(assets.id.toString()).toString()
   const date = new Date(assets.created_at)
   return (
     <div className={clsx(className, 'flex flex-col gap-6')}>
@@ -80,8 +80,8 @@ async function DownloadSection({release, className}: { release: ReleaseInfo, cla
       </div>
 
       <div className="flex flex-col gap-1 sm:px-6">
-        <HashDisplay kind="MD5" hash={encrypted}/>
-        <HashDisplay kind="SHA256" hash={hashSHA256}/>
+        {/* <HashDisplay kind="MD5" hash={encrypted}/>
+        <HashDisplay kind="SHA256" hash={hashSHA256}/> */}
       </div>
     </div>
   )
@@ -114,7 +114,7 @@ async function ContentDivider({children, ...rest}: { children: React.ReactNode, 
   )
 }
 
-export async function ReleaseDisplay({plugin, release}: { plugin: SimplePlugin, release: ReleaseInfo }) {
+export async function ReleaseDisplay({plugin, release}: { plugin: SimplePlugin, release: Releases }) {
   const t = await getTranslations('page.plugin.release')
   const isLatest = release.tag_name === plugin.latestRelease?.version
   const assets = release.assets[0]

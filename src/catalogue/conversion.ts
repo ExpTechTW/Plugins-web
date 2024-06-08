@@ -8,11 +8,15 @@ export async function createSimpleEverything(everything: Everything): Promise<Si
     // authors: everything.authors,
     plugin_list: {},
     last_update_time: everything.last_update_time,
+    info: {},
+    PluginInfo: {},
   };
 
   for (const [pluginId, plugin] of Object.entries(everything.plugin_list)) {
     const info = await getInfo(plugin.github, plugin.package_name);
     const PluginInfo = await getPluginInfo(plugin.github)
+    simpleEverythingTemp.info[plugin.package_name] = info
+    simpleEverythingTemp.PluginInfo[plugin.package_name] = PluginInfo
     simpleEverythingTemp.plugin_list[plugin.package_name] = createSimplePlugin(plugin, info, PluginInfo);
   }
 

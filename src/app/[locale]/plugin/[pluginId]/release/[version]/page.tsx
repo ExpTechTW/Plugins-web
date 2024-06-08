@@ -11,25 +11,27 @@ interface PageParams {
   version: string
 }
 
-async function getRelease(plugin: AllOfAPlugin, version: string): Promise<ReleaseInfo | undefined> {
-  const releases = await getPluginInfo(plugin.github);
-  if (releases && releases.length > 0) {
-    const release = releases.find(r => r.tag_name === version);
-    return release;
-  } else {
-    return undefined;
-  }
-}
+// async function getRelease(plugin: AllOfAPlugin, version: string): Promise<ReleaseInfo | undefined> {
+//   const releases = await getPluginInfo(plugin.github);
+//   if (releases && releases.length > 0) {
+//     const release = releases.find(r => r.tag_name === version);
+//     return release;
+//   } else {
+//     return undefined;
+//   }
+// }
 
 export async function generateMetadata({params}: {params: PageParams}) {
   const t = await getTranslations({locale: params.locale, namespace: 'metadata.title'})
   const plugin = await getPlugin(params.pluginId)
+  const everything = await getSimpleEverything()
 
   let title = t('catalogue')
   if (plugin) {
     const version = decodeURIComponent(params.version)
+    const release = everything.PluginInfo[params.pluginId].find(r => r.tag_name === version);
     const pluginName = plugin?.meta?.name || '?'
-    if (await getRelease(plugin, version)) {
+    if (release) {
       title = t('plugin_release', {
         name: pluginName,
         version: version,
@@ -42,27 +44,25 @@ export async function generateMetadata({params}: {params: PageParams}) {
   return {title}
 }
 
-export async function generateStaticParams({params}: {params: {pluginId: string}}) {
-  const plugin = await getPluginOr404(params.pluginId)
-  if (plugin.release) {
-    return plugin.release.releases.map(r => {
-      return {version: r.meta.version}
-    })
-  } else {
-    return []
-  }
-}
+// export async function generateStaticParams({params}: {params: {pluginId: string}}) {
+//   const plugin = await getPluginOr404(params.pluginId)
+//   if (plugin.release) {
+//     return plugin.release.releases.map(r => {
+//       return {version: r.meta.version}
+//     })
+//   } else {
+//     return []
+//   }
+// }
 
 export default async function Page({params}: {params: PageParams}) {
   unstable_setRequestLocale(params.locale)
 
   const version = decodeURIComponent(params.version)
 
-  const plugin = await getPluginOr404(params.pluginId)
   const everything = await getSimpleEverything()
   const plugin_info = everything.plugin_list[params.pluginId]
-  const info = await getInfo(plugin_info.github,plugin_info.package_name)
-  const release = await getRelease(plugin, version)
+  const release = everything.PluginInfo[params.pluginId].find(r => r.tag_name === version);
   if (!release) {
     notFound()
   }
