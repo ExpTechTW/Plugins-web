@@ -62,7 +62,6 @@ export default async function Page({params}: {params: PageParams}) {
   const pluginId = decodeURIComponent(params.pluginId)
 
   const everything = await getSimpleEverything()
-  console.log(pluginId)
   const plugin_list = everything.plugin_list[pluginId]
   if (!plugin_list) {
     notFound()
