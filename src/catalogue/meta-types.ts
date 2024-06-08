@@ -170,6 +170,8 @@ export interface ReleaseSummary {
 }
 
 export interface ReleaseInfo {
+  body: string | null | undefined
+  html_url: any
   assets: any
   url: string
   name: string

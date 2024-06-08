@@ -32,13 +32,13 @@
       "__unknown": "未知"
     },
     "plugin_dependencies": {
-      "title_plugin": "MCDR 擴充依賴",
-      "title_package": "Python 包依賴",
+      "title_plugin": "CDPS 擴充依賴",
+      "title_package": "Python 套件依賴",
       "plugin_id": "擴充 ID",
-      "py_package": "Python 包",
+      "py_package": "Python 套件",
       "requirement": "依賴版本",
       "none": "無",
-      "py_package_command": "Python 包安裝指令"
+      "py_package_command": "Python 套件安裝指令"
     },
     "github_proxy_switch": {
       "label": "使用 GitHub Proxy 加速",

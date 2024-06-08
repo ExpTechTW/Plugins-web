@@ -64,7 +64,7 @@ async function DownloadSection({release, className}: { release: ReleaseInfo, cla
           rightSection={<IconExternalLink size={16} stroke={1.6}/>}
           component="a"
           target="_blank"
-          href={release.url}
+          href={release.html_url}
         >
           {t('visit_release')}
         </DownloadSectionButton>
@@ -145,7 +145,7 @@ export async function ReleaseDisplay({plugin, release}: { plugin: SimplePlugin, 
           <span className="ml-1">{t('release_notes')}</span>
         </ContentDivider>
 
-        <ReleaseDescription description={release.description}/>
+        <ReleaseDescription description={release.body}/>
       </div>
     </>
   )

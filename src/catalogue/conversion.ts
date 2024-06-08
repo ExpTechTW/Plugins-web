@@ -49,6 +49,7 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json, Plugin
   // const label = [0]
   // const authors = plugin.name
   // const description = plugin.description
+  console.log('PluginInfo',PluginInfo)
   return {
     id: plugin.package_name,
     repos: `https://github.com/${github}`,
@@ -61,10 +62,10 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json, Plugin
     downloads: downloads,
     // latestRelease: latestSimpleRelease,
     latestRelease: {
-      version: PluginInfo[0].tag_name,
-      url: PluginInfo[0].url,
-      assetName: PluginInfo[0].assets[0].name,
-      assetUrl: PluginInfo[0].assets[0].browser_download_url,
+      version: PluginInfo[0] ? PluginInfo[0].tag_name : '',
+      url: PluginInfo[0] ? PluginInfo[0].url : '',
+      assetName: PluginInfo[0] ? PluginInfo[0].assets[0].name : '',
+      assetUrl: PluginInfo[0] ? PluginInfo[0].assets[0].browser_download_url : '',
     },
     name: plugin.name,
     description: plugin.description,

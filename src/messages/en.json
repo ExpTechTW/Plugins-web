@@ -32,7 +32,7 @@
       "__unknown": "unknown"
     },
     "plugin_dependencies": {
-      "title_plugin": "MCDR Plugin Dependencies",
+      "title_plugin": "CDPS Plugin Dependencies",
       "title_package": "Python Package Requirements",
       "plugin_id": "Plugin ID",
       "py_package": "Python Package",

@@ -47,6 +47,10 @@ async function PluginContentReleases({plugin}: {plugin: AllOfAPlugin}) {
   // }
 
   releases = info
+  if(!Array.isArray(releases)){
+    return;
+  }
+
   return (
     <ScrollArea scrollbars="x" className="w-full">
       <div className="min-w-[360px] mb-3">
