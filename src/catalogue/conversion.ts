@@ -49,7 +49,6 @@ export function createSimplePlugin(plugin: AllOfAPlugin, info: cdps_json, Plugin
   // const label = [0]
   // const authors = plugin.name
   // const description = plugin.description
-  console.log('PluginInfo',PluginInfo)
   return {
     id: plugin.package_name,
     repos: `https://github.com/${github}`,

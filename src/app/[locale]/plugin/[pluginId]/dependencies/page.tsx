@@ -1,4 +1,4 @@
-import { getPluginOr404 } from "@/catalogue/data";
+import { getInfo, getPluginOr404 } from "@/catalogue/data";
 import { AllOfAPlugin } from "@/catalogue/meta-types";
 import { NoneText } from "@/components/none-text";
 import { PluginDependenciesAll } from "@/components/plugin/plugin-dependencies";
@@ -7,20 +7,19 @@ import React from "react";
 
 async function PageContent({plugin}: { plugin: AllOfAPlugin }) {
   const t = await getTranslations('page.plugin.dependencies')
-  const latestRelease = plugin.release ? plugin.release.releases[plugin.release.latest_version_index ?? -1] : undefined
-  const meta = latestRelease !== undefined ? latestRelease.meta : plugin.meta
+  const info = await getInfo(plugin.github,plugin.package_name)
 
-  if (!meta) {
+  if (!info) {
     return <NoneText>{t('meta_unavailable')}</NoneText>
   }
 
   return (
     <div>
-      <PluginDependenciesAll meta={meta}/>
+      <PluginDependenciesAll meta={info}/>
       <p className="mt-5 text-end text-sm text-mantine-dimmed">
         {t('meta_source', {
-          src: latestRelease !== undefined
-            ? t('meta_source_latest_release', {version: meta.version})
+          src: info
+            ? t('meta_source_latest_release', {version: info.version})
             : t('meta_source_branch', {branch: plugin.plugin.branch})
         })}
       </p>

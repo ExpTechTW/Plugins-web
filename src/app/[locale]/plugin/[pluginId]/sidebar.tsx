@@ -18,6 +18,7 @@ import { IconArrowBackUp, IconFileDownload, IconLink, IconRefresh, IconReload, I
 import { useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 async function SidebarBackButton() {
   const t = await getTranslations('page.plugin.sidebar')
@@ -45,6 +46,7 @@ async function PluginDescription({ description }: { description: string }) {
 export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: AllOfAPlugin, simplePlugin: SimplePlugin, timestamp: string }) {
   // const locale = useLocale()
   const t = await getTranslations('page.plugin.sidebar')
+  
 
   const textClass = 'overflow-hidden overflow-ellipsis break-words'
 
