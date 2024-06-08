@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install dependency
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: use
+        run: npm run start
