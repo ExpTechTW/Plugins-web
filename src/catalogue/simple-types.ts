@@ -1,4 +1,4 @@
-import { AuthorInfo, AuthorSummary, LangDict } from "@/catalogue/meta-types";
+import { AuthorInfo, Releases, cdps_json } from "@/catalogue/meta-types";
 
 export interface SimpleEverything {
   // timestamp: number
@@ -6,6 +6,12 @@ export interface SimpleEverything {
   last_update_time: string
   plugin_list: {
     [key: string]: SimplePlugin
+  }
+  info: {
+    [key: string]: cdps_json
+  }
+  PluginInfo: {
+    [key: string]: Releases[]
   }
 }
 

@@ -43,7 +43,6 @@ async function PluginDescription({ description }: { description: string }) {
 export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: AllOfAPlugin, simplePlugin: SimplePlugin, timestamp: string }) {
   // const locale = useLocale()
   const t = await getTranslations('page.plugin.sidebar')
-  
 
   const textClass = 'overflow-hidden overflow-ellipsis break-words'
 
@@ -112,14 +111,14 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
           <AttributeEntry Icon={IconTag} label={t('latest_version')}>
             {
               simplePlugin.version !== undefined
-                // ? <NaLink
-                //   href={routes.pluginRelease(simplePlugin.id, info.version)}
-                //   className={textClass}
-                //   hoverColor
-                // >
-                //   {info.version}
-                // </NaLink>
-                ? <p className={textClass}>{simplePlugin.version}</p>
+                ? <NaLink
+                  href={routes.pluginRelease(simplePlugin.id, simplePlugin.version)}
+                  className={textClass}
+                  hoverColor
+                >
+                  {simplePlugin.version}
+                </NaLink>
+                // ? <p className={textClass}>{simplePlugin.version}</p>
                 : <p className={textClass}>N/A</p>
             }
           </AttributeEntry>
