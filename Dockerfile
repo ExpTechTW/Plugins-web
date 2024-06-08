@@ -28,4 +28,4 @@ COPY --from=builder /app .
 # EXPOSE 1015
 
 # 定義啟動命令
-CMD ["npm", "run", "start", "-p", "8080"]
+CMD ["npm", "run", "start"]
