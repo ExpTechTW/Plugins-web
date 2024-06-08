@@ -30,7 +30,7 @@ export async function generateMetadata({params}: {params: PageParams}) {
   if (plugin) {
     const version = decodeURIComponent(params.version)
     const release = everything.PluginInfo[params.pluginId].find(r => r.tag_name === version);
-    const pluginName = plugin?.meta?.name || '?'
+    const pluginName = params.pluginId
     if (release) {
       title = t('plugin_release', {
         name: pluginName,
