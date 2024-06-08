@@ -1,4 +1,4 @@
-import { MetaInfo } from "@/catalogue/meta-types";
+import { MetaInfo, cdps_json } from "@/catalogue/meta-types";
 import { NaLink } from "@/components/na-link";
 import { NoneText } from "@/components/none-text";
 import { siteConfig } from "@/site/config";
@@ -85,7 +85,7 @@ export async function PluginRequirementTable({dependencies}: {dependencies: {[_:
   )
 }
 
-export async function PackageRequirementTable({requirements}: {requirements: string[]}) {
+export async function PackageRequirementTable({requirements}: {requirements: {[_: string]: string}}) {
   const t = await getTranslations('component.plugin_dependencies')
   return (
     <div>
@@ -98,23 +98,23 @@ export async function PackageRequirementTable({requirements}: {requirements: str
           </TableTr>
         </TableThead>
         <TableTbody>
-          {requirements.map((line, index) => {
-            const pkg = line.match(/^[a-zA-z0-9._[\],-]+/)?.toString()
-            const req = pkg !== undefined ? line.substring(pkg.length).trimStart() : ''
+          {Object.entries(requirements).map(([pluginId, requirement], index) => {
+            const pkg = pluginId.match(/^[a-zA-z0-9._[\],-]+/)?.toString()
+            // const req = pkg !== undefined ? pluginId.substring(pkg.length).trimStart() : ''
             const pkgUrl = pkg !== undefined ? `https://pypi.org/project/${pkg.match(/^[a-zA-Z0-9._-]+/)}/` : undefined
             return (
               <TableTr key={index}>
                 <TableTd>
                   {pkgUrl !== undefined
                     ? <NaLink href={pkgUrl} hoverColor>{pkg}</NaLink>
-                    : pkg || line
+                    : pkg || pluginId
                   }
                 </TableTd>
-                <TableTd>{req}</TableTd>
+                <TableTd>{requirement}</TableTd>
               </TableTr>
             )
           })}
-          {requirements.length == 0 && <NoneRow/>}
+          {Object.keys(requirements).length == 0 && <NoneRow/>}
         </TableTbody>
       </Table>
     </div>
@@ -131,13 +131,13 @@ export async function PluginRequirementsPipCodeBlock({requirements}: {requiremen
   )
 }
 
-export async function PluginDependenciesAll({meta}: { meta: MetaInfo }) {
+export async function PluginDependenciesAll({meta}: { meta: cdps_json }) {
   const requirement: string | any[] = [];
   return (
     <div className="flex flex-col gap-5">
       <div className="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 gap-5">
         <PluginRequirementTable dependencies={meta.dependencies}/>
-        <PackageRequirementTable requirements={requirement}/>
+        <PackageRequirementTable requirements={meta.pip_dependencies}/>
       </div>
       {requirement.length > 0 && <PluginRequirementsPipCodeBlock requirements={requirement}/>}
     </div>
