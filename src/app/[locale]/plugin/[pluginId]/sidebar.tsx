@@ -56,8 +56,6 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
     : <p className="text-mantine-gray-text">N/A</p>
   const syncTimeText = <TimeAgoDynamic date={new Date(Date.now())} />
 
-  // console.log(simplePlugin)
-  // const info = await getInfo(plugin.github,plugin.package_name)
   const PluginInfo = await getPluginInfo(simplePlugin.github)
   let download_count = 0
 
@@ -76,7 +74,6 @@ export async function Sidebar({ plugin, simplePlugin, timestamp }: { plugin: All
             <p className="text-2xl font-semibold">{simplePlugin.name}</p>
           </NaLink>
           <PluginDescription description={simplePlugin.description || ''} />
-          {/* <PluginDescription description={translateLangDict(locale, simplePlugin.description) || ''} /> */}
           <div className="flex flex-row flex-wrap gap-1">
             {simplePlugin.labels.map(label => (
               <div key={label} className="">
