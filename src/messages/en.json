@@ -51,15 +51,7 @@
       "description_alt": "This is a python based Minecraft server control tool",
       "catalogue": "Explore plugins",
       "docs": "Read the docs",
-      "github": "GitHub",
-      "feature": {
-        "vanilla_t": "Faithful to Vanilla",
-        "vanilla": "It's running above the server. It doesn't need to modify the server at all, which keeps everything vanilla",
-        "plugins_t": "Feature Rich",
-        "plugins": "From an in-game calculator, player highlighter, and Twitch chat bot, to a scoreboard manipulator, file manager, and backup system, all of them can be implemented with MCDReforged plugins",
-        "compatibility_t": "Broad Compatibility",
-        "compatibility": "Supports running various types of servers, including but not limited to vanilla, fabric, paper, and bungeecord, on Linux / Windows"
-      }
+      "github": "GitHub"
     },
     "plugin_list": {
       "sidebar": {

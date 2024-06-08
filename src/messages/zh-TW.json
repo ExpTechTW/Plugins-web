@@ -9,9 +9,9 @@
   "layout": {
     "nav_bar": {
       "navigation": {
-        "home": "主頁",
+        "home": "首頁",
         "plugins": "擴充列表",
-        "docs": "技術文件"
+        "docs": "技術文檔"
       },
       "locale_switch": {
         "en": "English",
@@ -49,16 +49,8 @@
     "home": {
       "description": "複合式防災伺服器",
       "catalogue": "探索擴充",
-      "docs": "閱讀技術文件",
-      "github": "GitHub",
-      "feature": {
-        "vanilla_t": "忠於原版",
-        "vanilla": "運行於伺服端之上，僅接管伺服端輸入輸出，無需修改伺服端即可實現各種擴充功能。保留原汁原味的 Minecraft 原版特性",
-        "plugins_t": "功能豐富",
-        "plugins": "小至計算器、高亮玩家、b 站彈幕姬，大至操控計分板、管理結構文件、自助備份回檔，都可以通過編寫 MCDReforged 的擴充實現",
-        "compatibility_t": "兼容性廣",
-        "compatibility": "支持在 Linux / Windows 等平台上運行任意種類的伺服端，包括但不限於 vanilla、fabric、paper 以及 bungeecord 等"
-      }
+      "docs": "閱讀技術文檔",
+      "github": "GitHub"
     },
     "plugin_list": {
       "sidebar": {
@@ -97,7 +89,7 @@
       "sidebar": {
         "author": "作者",
         "repository": "原始碼倉",
-        "homepage": "擴充主頁",
+        "homepage": "擴充首頁",
         "last_update": "上次更新",
         "latest_version": "最新版本",
         "total_downloads": "總下載次數",
