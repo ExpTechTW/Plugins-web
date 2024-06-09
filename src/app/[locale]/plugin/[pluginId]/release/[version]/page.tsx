@@ -59,17 +59,25 @@ export default async function Page({params}: {params: PageParams}) {
   unstable_setRequestLocale(params.locale)
 
   const version = decodeURIComponent(params.version)
+  const pluginId = decodeURIComponent(params.pluginId)
 
   const everything = await getSimpleEverything()
-  const plugin_info = everything.plugin_list[params.pluginId]
-  const release = everything.PluginInfo[params.pluginId].find(r => r.tag_name === version);
+  const plugin_list = everything.plugin_list[pluginId]
+  if (!plugin_list) {
+    notFound()
+  }
+  const plugin_info = everything.PluginInfo[pluginId]
+  if (!plugin_info) {
+    notFound()
+  }
+  const release = plugin_info.find(r => r.tag_name === version);
   if (!release) {
     notFound()
   }
 
   return (
     <ReleaseDisplay
-      plugin={plugin_info}
+      plugin={plugin_list}
       release={release}
     />
   )

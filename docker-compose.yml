@@ -1,0 +1,8 @@
+services:
+  pluginswebsite:
+    container_name: pluginswebsite
+    image: pluginswebsite
+    # ports:
+    #   - "1015:1015/udp"
+    restart: on-failure
+    network_mode: host

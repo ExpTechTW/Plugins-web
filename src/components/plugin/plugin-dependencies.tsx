@@ -87,7 +87,7 @@ export async function PluginRequirementTable({dependencies}: {dependencies: {[_:
 
 export async function PackageRequirementTable({requirements}: {requirements: {[_: string]: string}}) {
   const t = await getTranslations('component.plugin_dependencies')
-  console.log(requirements)
+  // console.log(requirements)
   return (
     <div>
       <SectionTitle className="mb-2">{t('title_package')}</SectionTitle>
