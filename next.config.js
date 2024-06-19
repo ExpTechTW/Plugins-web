@@ -14,6 +14,7 @@ const nextConfig = withBundleAnalyzer(withNextIntl({
       fullUrl: true,
     },
   },
+  output: "standalone",
 }))
 
 module.exports = nextConfig

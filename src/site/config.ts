@@ -4,8 +4,8 @@ export const siteConfig = {
   description: 'ExpTech Studio',
   favicon: "/favicon.svg",
   links: {
-    docs: "https://exptech.dev",
-    WebSite: "https://exptech.com.tw/trem",
+    docs: "https://docs.exptech.dev",
+    WebSite: "https://exptech.dev/trem",
     Discord: "https://discord.gg/exptech-studio",
     githubMcdr: "https://github.com/ExpTechTW/CDPS",
     // githubWebsite: "https://github.com/MCDReforged/website",
