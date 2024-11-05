@@ -7,7 +7,7 @@ import {
   ReleaseInfo,
   Releases,
   ReleasesAsset,
-  cdps_json,
+  trem_json,
 } from "./meta-types";
 import { SimpleEverything, SimplePlugin, SimpleRelease } from "./simple-types";
 
@@ -40,7 +40,7 @@ export async function createSimpleEverything(
 
 export function createSimplePlugin(
   plugin: AllOfAPlugin,
-  info: cdps_json,
+  info: trem_json,
   PluginInfo: Releases[]
 ): SimplePlugin {
   let downloads = 0;

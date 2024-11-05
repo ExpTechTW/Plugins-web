@@ -1,4 +1,4 @@
-import { MetaInfo, cdps_json } from "@/catalogue/meta-types";
+import { MetaInfo, trem_json } from "@/catalogue/meta-types";
 import { NaLink } from "@/components/na-link";
 import { NoneText } from "@/components/none-text";
 import { siteConfig } from "@/site/config";
@@ -182,7 +182,7 @@ export async function PluginRequirementsPipCodeBlock({
   );
 }
 
-export async function PluginDependenciesAll({ meta }: { meta: cdps_json }) {
+export async function PluginDependenciesAll({ meta }: { meta: trem_json }) {
   const requirement: string | any[] = [];
   return (
     <div className="flex flex-col gap-5">
