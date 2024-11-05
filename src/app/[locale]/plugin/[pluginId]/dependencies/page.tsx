@@ -7,7 +7,7 @@ import React from "react";
 
 async function PageContent({plugin}: { plugin: AllOfAPlugin }) {
   const t = await getTranslations('page.plugin.dependencies')
-  const info = await getInfo(plugin.github,plugin.package_name)
+  const info = await getInfo(plugin.github)
 
   if (!info) {
     return <NoneText>{t('meta_unavailable')}</NoneText>

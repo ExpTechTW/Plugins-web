@@ -27,7 +27,6 @@ export interface SimplePlugin {
   description: string;
   tag: string[];
   github: string;
-  package_name: string;
   last_update_time: string;
   version: string;
 }

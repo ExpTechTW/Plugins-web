@@ -65,7 +65,7 @@ async function PluginContentReleases({ plugin }: { plugin: AllOfAPlugin }) {
         {releases.map((ri: Releases) => {
           const version = ri.tag_name;
           const date = new Date(ri.created_at);
-          const href = routes.pluginRelease(plugin.package_name, version);
+          const href = routes.pluginRelease(plugin.name, version);
           return (
             <ReleaseRow key={version} href={href}>
               <div className="flex flex-row items-center gap-4">

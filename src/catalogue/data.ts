@@ -67,8 +67,8 @@ async function fetchEverything(): Promise<Everything> {
   // }
 }
 
-export async function getInfo(github: string, pkg: string): Promise<trem_json> {
-  const url = `https://raw.githubusercontent.com/${github}/main/${pkg}/info.json`;
+export async function getInfo(github: string): Promise<trem_json> {
+  const url = `https://raw.githubusercontent.com/${github}/main/info.json`;
   const rsp = await fetch(url, {
     next: {
       revalidate: 10 * 60, // ISR 10min
@@ -112,7 +112,7 @@ export async function getPlugin(
 ): Promise<AllOfAPlugin | undefined> {
   const everything = await getEverything();
   const plugin_list: AllOfAPlugin[] = Object.values(everything.plugin_list);
-  return plugin_list.find((plugin) => plugin.package_name === pluginId);
+  return plugin_list.find((plugin) => plugin.name === pluginId);
 }
 
 export async function getPluginOr404(pluginId: string): Promise<AllOfAPlugin> {

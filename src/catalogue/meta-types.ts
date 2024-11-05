@@ -129,7 +129,6 @@ export interface AllOfAPlugin {
   description: string;
   tag: string[];
   github: string;
-  package_name: string;
   last_update_time: string;
   // forEach(arg0: (element: any) => void): unknown
   // github(github: any): unknown

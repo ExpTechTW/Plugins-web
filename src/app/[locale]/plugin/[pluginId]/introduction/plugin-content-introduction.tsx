@@ -9,7 +9,7 @@ export async function PluginContentIntroduction({
 }: {
   plugin: AllOfAPlugin;
 }) {
-  const desc = await get_content(plugin.github, plugin.package_name);
+  const desc = await get_content(plugin.github);
   // const introduction = translateLangDict(await getLocale(), desc, true) || ''
   return (
     <>
@@ -19,8 +19,8 @@ export async function PluginContentIntroduction({
   );
 }
 
-async function get_content(repo: string, pkg: string): Promise<string> {
-  const url = `https://raw.githubusercontent.com/${repo}/main/${pkg}/info.json`;
+async function get_content(repo: string): Promise<string> {
+  const url = `https://raw.githubusercontent.com/${repo}/main/info.json`;
   const rsp = await fetch(url);
   const data = await rsp.json();
   const desc = data.description.zh_tw;

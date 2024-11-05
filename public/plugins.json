@@ -2,11 +2,12 @@
   "last_update_time": "2024-11-06 03:18",
   "plugin_list": [
     {
-      "name": "report_webhook",
+      "name": "Report Webhook",
       "description": "地震報告 Webhook",
-      "tag": ["info"],
+      "tag": [
+        "info"
+      ],
       "github": "ExpTechTW/TREM-Report-Webhook",
-      "package_name": "report_webhook",
       "last_update_time": "2024-11-06 03:18"
     }
   ]

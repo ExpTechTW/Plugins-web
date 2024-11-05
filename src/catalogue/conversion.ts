@@ -24,11 +24,11 @@ export async function createSimpleEverything(
   };
 
   for (const [pluginId, plugin] of Object.entries(everything.plugin_list)) {
-    const info = await getInfo(plugin.github, plugin.package_name);
+    const info = await getInfo(plugin.github);
     const PluginInfo = await getPluginInfo(plugin.github);
-    simpleEverythingTemp.info[plugin.package_name] = info;
-    simpleEverythingTemp.PluginInfo[plugin.package_name] = PluginInfo;
-    simpleEverythingTemp.plugin_list[plugin.package_name] = createSimplePlugin(
+    simpleEverythingTemp.info[plugin.name] = info;
+    simpleEverythingTemp.PluginInfo[plugin.name] = PluginInfo;
+    simpleEverythingTemp.plugin_list[plugin.name] = createSimplePlugin(
       plugin,
       info,
       PluginInfo
@@ -73,7 +73,7 @@ export function createSimplePlugin(
   // const authors = plugin.name
   // const description = plugin.description
   return {
-    id: plugin.package_name,
+    id: plugin.name,
     repos: `https://github.com/${github}`,
     reposHome: "https://github.com/ExpTechTW/TREM-Lite",
     labels: plugin.tag,
@@ -98,7 +98,6 @@ export function createSimplePlugin(
     tag: plugin.tag,
     github: plugin.github,
     // github: `https://github.com/${github}`,
-    package_name: plugin.package_name,
     last_update_time: plugin.last_update_time,
     version: info.version,
   };

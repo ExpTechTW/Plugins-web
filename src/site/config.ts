@@ -10,7 +10,7 @@ export const siteConfig = {
     githubTrem: "https://github.com/ExpTechTW/TREM-Lite",
     // githubWebsite: "https://github.com/MCDReforged/website",
     // githubCatalogue: "https://github.com/MCDReforged/PluginCatalogue",
-    pypi: "https://pypi.org/project/cdps",
+    // pypi: "https://pypi.org/project/",
     // dockerhub: "https://hub.docker.com/r/mcdreforged/mcdreforged",
   },
 

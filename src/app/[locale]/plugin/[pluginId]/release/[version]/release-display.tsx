@@ -159,7 +159,7 @@ export async function ReleaseDisplay({
   const t = await getTranslations("page.plugin.release");
   const isLatest = release.tag_name === plugin.latestRelease?.version;
   const assets = release.assets[0];
-  const info = await getInfo(plugin.github, plugin.package_name);
+  const info = await getInfo(plugin.github);
   return (
     <>
       <div>
