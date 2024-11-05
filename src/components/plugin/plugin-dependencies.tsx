@@ -88,7 +88,7 @@ export async function PluginRequirementTable({
             ([pluginId, requirement], index) => {
               const id = pluginId.match(/^[a-zA-Z0-9_]+$/)?.toString();
               let pluginUrl: string | undefined;
-              if (id === "cdps") {
+              if (id === "trem") {
                 pluginUrl = siteConfig.links.githubTrem;
               } else if (id === "python") {
                 pluginUrl = "https://www.python.org";

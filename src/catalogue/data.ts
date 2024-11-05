@@ -43,7 +43,7 @@ const gunzipAsync = promisify(gunzip);
 async function fetchEverything(): Promise<Everything> {
   const url: string =
     process.env.MW_EVERYTHING_JSON_URL ||
-    "https://raw.githubusercontent.com/ExpTechTW/CDPS/master/assets/plugins.json";
+    "https://raw.githubusercontent.com/ExpTechTW/Plugins-web/refs/heads/main/public/plugins.json";
 
   // The 2nd init param cannot be defined as a standalone global constant variable,
   // or the ISR might be broken: fetchEverything() will never be invoked after the first 2 round of requests,
@@ -68,7 +68,7 @@ async function fetchEverything(): Promise<Everything> {
 }
 
 export async function getInfo(github: string, pkg: string): Promise<trem_json> {
-  const url = `https://raw.githubusercontent.com/${github}/master/${pkg}/cdps.json`;
+  const url = `https://raw.githubusercontent.com/${github}/master/${pkg}/trem.json`;
   const rsp = await fetch(url, {
     next: {
       revalidate: 10 * 60, // ISR 10min

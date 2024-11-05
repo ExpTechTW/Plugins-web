@@ -4,23 +4,25 @@ import { translateLangDict } from "@/utils/i18n-utils";
 import { getLocale } from "next-intl/server";
 import React from "react";
 
-export async function PluginContentIntroduction({plugin}: { plugin: AllOfAPlugin }) {
-  const desc = await get_content(plugin.github,plugin.package_name)
+export async function PluginContentIntroduction({
+  plugin,
+}: {
+  plugin: AllOfAPlugin;
+}) {
+  const desc = await get_content(plugin.github, plugin.package_name);
   // const introduction = translateLangDict(await getLocale(), desc, true) || ''
   return (
     <>
       {/* SSR, no need to use GfmMarkdownDynamic */}
-      <GfmMarkdown allowEmbedHtml>
-        {desc}
-      </GfmMarkdown>
+      <GfmMarkdown allowEmbedHtml>{desc}</GfmMarkdown>
     </>
-  )
+  );
 }
 
-async function get_content(repo: string,pkg:string): Promise<string> {
-  const url = `https://raw.githubusercontent.com/${repo}/master/${pkg}/cdps.json`
-  const rsp = await fetch(url)
-  const data = await rsp.json()
-  const desc = data.description.zh_tw
-  return desc
+async function get_content(repo: string, pkg: string): Promise<string> {
+  const url = `https://raw.githubusercontent.com/${repo}/master/${pkg}/trem.json`;
+  const rsp = await fetch(url);
+  const data = await rsp.json();
+  const desc = data.description.zh_tw;
+  return desc;
 }
