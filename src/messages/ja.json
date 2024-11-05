@@ -33,7 +33,7 @@
       "__unknown": "不明"
     },
     "plugin_dependencies": {
-      "title_plugin": "CDPS拡張機能の依存関係",
+      "title_plugin": "TREM拡張機能の依存関係",
       "title_package": "Pythonスイートの依存関係",
       "plugin_id": "拡張ID",
       "py_package": "Pythonスイート",

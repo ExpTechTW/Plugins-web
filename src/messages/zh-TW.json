@@ -33,7 +33,7 @@
       "__unknown": "未知"
     },
     "plugin_dependencies": {
-      "title_plugin": "CDPS 擴充依賴",
+      "title_plugin": "TREM 擴充依賴",
       "title_package": "Python 套件依賴",
       "plugin_id": "擴充 ID",
       "py_package": "Python 套件",
