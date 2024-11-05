@@ -1,136 +1,186 @@
-'use client'
+"use client";
 
 import { usePathname } from "@/common/navigation";
-import { GithubIcon, McdrLogo, } from "@/components/icons";
+import { GithubIcon, McdrLogo } from "@/components/icons";
 import { NaLink } from "@/components/na-link";
 import { NavbarSwitches } from "@/components/navbar/navbar-switches";
 import { siteConfig } from "@/site/config";
 import { routes } from "@/site/routes";
-import { Box, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconBook2, IconExternalLink, IconHome, IconPackages, TablerIconsProps } from "@tabler/icons-react";
+import { Box, Burger } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconBook2,
+  IconExternalLink,
+  IconHome,
+  IconPackages,
+  TablerIconsProps,
+} from "@tabler/icons-react";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
-import styles from './navbar.module.css';
+import styles from "./navbar.module.css";
 
 interface NavItem {
-  icon: (props: TablerIconsProps) => React.ReactNode,
-  key: string
-  href: string
-  isExternal: boolean
-  checkActive: (pathname: string) => boolean
+  icon: (props: TablerIconsProps) => React.ReactNode;
+  key: string;
+  href: string;
+  isExternal: boolean;
+  checkActive: (pathname: string) => boolean;
 }
 
 const navItems: NavItem[] = [
   {
     icon: IconHome,
-    key: 'home',
-    href: '/',
+    key: "home",
+    href: "/",
     isExternal: false,
-    checkActive: (pathname: string) => pathname === '/',
+    checkActive: (pathname: string) => pathname === "/",
   },
   {
     icon: IconPackages,
-    key: 'plugins',
-    href: '/plugins',
+    key: "plugins",
+    href: "/plugins",
     isExternal: false,
-    checkActive: (pathname: string) => pathname === routes.catalogue() || pathname.startsWith(routes.pluginBase() + '/'),
+    checkActive: (pathname: string) =>
+      pathname === routes.catalogue() ||
+      pathname.startsWith(routes.pluginBase() + "/"),
   },
   {
     icon: IconBook2,
-    key: 'docs',
+    key: "docs",
     href: siteConfig.links.docs,
     isExternal: true,
     checkActive: (pathname: string) => false,
   },
-]
+];
 
 interface NavBarLinkProps {
-  className?: string
-  showIcon: boolean
-  item: NavItem
-  [key: string]: any
+  className?: string;
+  showIcon: boolean;
+  item: NavItem;
+  [key: string]: any;
 }
 
-function NavbarLink({className, showIcon, item, ...props}: NavBarLinkProps) {
-  const t = useTranslations('layout.nav_bar.navigation');
-  const pathname = usePathname()
-  const Icon = item.icon
+function NavbarLink({ className, showIcon, item, ...props }: NavBarLinkProps) {
+  const t = useTranslations("layout.nav_bar.navigation");
+  const pathname = usePathname();
+  const Icon = item.icon;
   return (
     <NaLink
-      className={clsx(styles.link, className, "hover:bg-mantine-light-gray-background")}
+      className={clsx(
+        styles.link,
+        className,
+        "hover:bg-mantine-light-gray-background"
+      )}
       href={item.href}
       data-active={item.checkActive(pathname) || undefined}
       {...props}
     >
       <div className="flex flex-row gap-1 justify-center items-center h-full">
-        {showIcon && <Icon size={20} stroke={1.4}/>}
+        {showIcon && <Icon size={20} stroke={1.4} />}
         <p>{t(item.key)}</p>
-        {item.isExternal && <IconExternalLink size={16} stroke={1.4}/>}
+        {item.isExternal && <IconExternalLink size={16} stroke={1.4} />}
       </div>
     </NaLink>
-  )
+  );
 }
 
-function BurgerNavMenuSwitch({className, opened, toggleOpened}: {className?: string, opened: boolean, toggleOpened: () => void}) {
+function BurgerNavMenuSwitch({
+  className,
+  opened,
+  toggleOpened,
+}: {
+  className?: string;
+  opened: boolean;
+  toggleOpened: () => void;
+}) {
   return (
     <Burger
       className={className}
       aria-label="Open navigation"
-      opened={opened} onClick={toggleOpened}
+      opened={opened}
+      onClick={toggleOpened}
     />
-  )
+  );
 }
 
-function DesktopNavBar({className, navOpened, navToggle}: { className?: string, navOpened: boolean, navToggle: () => void}) {
+function DesktopNavBar({
+  className,
+  navOpened,
+  navToggle,
+}: {
+  className?: string;
+  navOpened: boolean;
+  navToggle: () => void;
+}) {
   // < 340px:   = [] OOO
   // < sm   :   = []MCDR   OOO
   // >= sm  :   = []MCDR xxx    OOO
   return (
-    <div className={clsx(
-      className,
-      "flex flex-row flex-nowrap gap-4 items-center justify-between",
-      "max-w-screen-xl w-full px-4 sm:px-6",
-    )}>
-      <BurgerNavMenuSwitch className="sm:hidden" opened={navOpened} toggleOpened={navToggle}/>
+    <div
+      className={clsx(
+        className,
+        "flex flex-row flex-nowrap gap-4 items-center justify-between",
+        "max-w-screen-xl w-full px-4 sm:px-6"
+      )}
+    >
+      <BurgerNavMenuSwitch
+        className="sm:hidden"
+        opened={navOpened}
+        toggleOpened={navToggle}
+      />
 
       <div className="gap-3 justify-start max-sm:grow">
         <NaLink className="flex items-center gap-3" color="foreground" href="/">
-          <McdrLogo size={36}/>
-          <p className="hidden min-[340px]:block font-bold text-inherit">ExpTech Studio</p>
+          <McdrLogo size={36} />
+          <p className="hidden min-[340px]:block font-bold text-inherit">
+            ExpTech Studio
+          </p>
         </NaLink>
       </div>
 
       <div className="hidden sm:flex gap-3 justify-start ml-2 grow">
-        {navItems.map((item) => <NavbarLink key={item.href} item={item} showIcon={false}/>)}
+        {navItems.map((item) => (
+          <NavbarLink key={item.href} item={item} showIcon={false} />
+        ))}
       </div>
 
       <div className="justify-end flex gap-2 items-center">
-        <Link target="_blank" href={siteConfig.links.githubMcdr} aria-label="Github">
-          <GithubIcon className="text-default-500"/>
+        <Link
+          target="_blank"
+          href={siteConfig.links.githubTrem}
+          aria-label="Github"
+        >
+          <GithubIcon className="text-default-500" />
         </Link>
         <NavbarSwitches />
       </div>
     </div>
-  )
+  );
 }
 
-function MobileNavMenu({navOpened, setClosed}: {  navOpened: boolean, setClosed: () => void}) {
+function MobileNavMenu({
+  navOpened,
+  setClosed,
+}: {
+  navOpened: boolean;
+  setClosed: () => void;
+}) {
   return (
     <Box
       className={clsx(
         "fixed top-navbar-height w-full py-3 px-6",
         "border-solid border-b border-mantine-border-card",
-        styles.mobileNavMenu,
+        styles.mobileNavMenu
       )}
-      mod={{hidden: !navOpened}}
+      mod={{ hidden: !navOpened }}
     >
       <div className="flex flex-col gap-2 max-w-screen-xl mx-auto">
         {navItems.map((item) => (
           <NavbarLink
-            key={item.href} item={item}
+            key={item.href}
+            item={item}
             className="h-[3rem] w-full"
             showIcon={true}
             onClick={setClosed}
@@ -138,7 +188,7 @@ function MobileNavMenu({navOpened, setClosed}: {  navOpened: boolean, setClosed:
         ))}
       </div>
     </Box>
-  )
+  );
 }
 
 export function Navbar() {
@@ -150,15 +200,14 @@ export function Navbar() {
           "z-40 top-0 w-full h-navbar-height",
           "flex flex-row fixed items-center justify-center",
           "border-solid border-b border-mantine-border-card",
-          "bg-mantine-background-body",
+          "bg-mantine-background-body"
         )}
       >
         <div className="scrollbar-shift-fix grow flex flex-col items-center">
-          <DesktopNavBar navOpened={navOpened} navToggle={navOpener.toggle}/>
-          <MobileNavMenu navOpened={navOpened} setClosed={navOpener.close}/>
+          <DesktopNavBar navOpened={navOpened} navToggle={navOpener.toggle} />
+          <MobileNavMenu navOpened={navOpened} setClosed={navOpener.close} />
         </div>
       </header>
-
     </>
   );
 }

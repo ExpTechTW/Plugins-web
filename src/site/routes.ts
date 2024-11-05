@@ -1,21 +1,21 @@
-type PluginTab = 'introduction' | 'readme' | 'releases' | 'dependencies'
+type PluginTab = "introduction" | "readme" | "releases" | "dependencies";
 
 class Routes {
-  home = () => '/'
-  catalogue = () => '/plugins'
+  home = () => "/";
+  catalogue = () => "/plugins";
 
-  pluginBase = () => '/plugin'
+  pluginBase = () => "/plugin";
   plugin(pluginId: string) {
-    return this.pluginBase() + '/' + pluginId;
-    // return `https://github.com/ExpTechTW/CDPS-${github}`;
+    return this.pluginBase() + "/" + pluginId;
+    // return `https://github.com/ExpTechTW/TREM-${github}`;
   }
 
   pluginTab(pluginId: string, tab: PluginTab) {
-    return this.plugin(pluginId) + '/' + tab
+    return this.plugin(pluginId) + "/" + tab;
   }
   pluginRelease(pluginId: string, version: string) {
-    return this.plugin(pluginId) + '/release/' + version
+    return this.plugin(pluginId) + "/release/" + version;
   }
 }
 
-export const routes = new Routes()
+export const routes = new Routes();
