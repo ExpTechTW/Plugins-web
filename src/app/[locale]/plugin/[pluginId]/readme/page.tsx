@@ -47,7 +47,7 @@ export default async function Page({params: {pluginId, locale}}: { params: { plu
 }
 
 async function get_readme(repo: string): Promise<{ data: string, url: string }> {
-  const url = `https://raw.githubusercontent.com/${repo}/master/README.md`
+  const url = `https://raw.githubusercontent.com/${repo}/main/README.md`
   const rsp = await fetch(url)
   const data = await rsp.text()
   const replace = replace_hashtag(repo,data)

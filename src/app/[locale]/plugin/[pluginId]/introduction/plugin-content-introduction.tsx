@@ -20,7 +20,7 @@ export async function PluginContentIntroduction({
 }
 
 async function get_content(repo: string, pkg: string): Promise<string> {
-  const url = `https://raw.githubusercontent.com/${repo}/master/${pkg}/info.json`;
+  const url = `https://raw.githubusercontent.com/${repo}/main/${pkg}/info.json`;
   const rsp = await fetch(url);
   const data = await rsp.json();
   const desc = data.description.zh_tw;
