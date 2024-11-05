@@ -68,7 +68,7 @@ async function fetchEverything(): Promise<Everything> {
 }
 
 export async function getInfo(github: string, pkg: string): Promise<trem_json> {
-  const url = `https://raw.githubusercontent.com/${github}/master/${pkg}/trem.json`;
+  const url = `https://raw.githubusercontent.com/${github}/master/${pkg}/info.json`;
   const rsp = await fetch(url, {
     next: {
       revalidate: 10 * 60, // ISR 10min
